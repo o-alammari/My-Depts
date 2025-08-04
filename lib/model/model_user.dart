@@ -1,37 +1,24 @@
-import 'dart:io';
-import 'dart:typed_data';
-
-class User {
+class ModelUser {
   int? id;
-  String? name;
-  String? contact;
-  String? description;
-  Uint8List? image;
+  String? userName;
+  String? password;
+  ModelUser({
+    this.id,
+    required this.userName,
+    required this.password,
+  });
 
-  
-// User fromJson(json) {
-//     return User(
-//       id: json['id'],
-//       nameCustomer: json['nameCustomer'],
-//       phoneCustomer: json['phoneCustomer'],
-//       creditCustomer: json['creditCustomer'],
-//     );
-//   }
+  factory ModelUser.fromJson(Map<String, dynamic> json) => ModelUser(
+        id: json['id'],
+        userName: json['userName'],
+        password: json['password'],
+      );
 
-//   Map<String, dynamic> toJson() {
-//     return {
-//       'nameCustomer': nameCustomer,
-//       'creditCustomer': creditCustomer,
-//     };
-//   }
-  userMap() {
-    var mapping = Map<String, dynamic>();
-    mapping['id'] = id;
-    mapping['name'] = name!;
-    mapping['contact'] = contact!;
-    mapping['description'] = description!;
-    mapping['image'] = image!;
-
-    return mapping;
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'userName': userName,
+      'password': password,
+    };
   }
 }

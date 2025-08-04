@@ -1,5 +1,6 @@
 class Name {
-  static String iDLoginScreen = 'LoginScreen';
+  static String iDSignUpScreen = 'SignUpScreen';
+  static String iDSignInScreen = 'SignInScreen';
   static String iDHomeScreen = 'SelectScreen';
   static String iDAllCustomer = 'AllCustomer';
   static String iDSearchScreenCustomers = 'SearchScreen';

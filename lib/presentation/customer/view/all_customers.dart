@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:testing_2/constant.dart';
+import 'package:testing_2/app/function/app_status.dart';
 import 'package:testing_2/presentation/customer/view-model/bloc/customer_bloc.dart';
 import 'package:testing_2/theme.dart';
 import 'widgets/all_customers_items.dart';
@@ -110,13 +111,7 @@ class AllCustomers extends StatelessWidget {
                       itemBuilder: (context, index) {
                         // var model = modelList[index];
                         return AllCustomersItems(
-                          // modelCustomer: modelList[index],
                           modelCustomer: state.allCustomer[index],
-                          // input1: input1,
-                          // input2: input2,
-                          // input3: input3,
-                          onDeletePress: () {},
-                          onEditPress: () {},
                         );
                       },
                     ),

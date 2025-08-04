@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:testing_2/constant.dart';
-import 'package:testing_2/function/custom_snack_bar.dart';
+import 'package:testing_2/app/function/app_status.dart';
+import 'package:testing_2/app/function/custom_snack_bar.dart';
 import 'package:testing_2/model/model_customer.dart';
 import 'package:testing_2/presentation/customer/view-model/bloc/customer_bloc.dart';
 import 'package:testing_2/services/customers_service.dart';
 import 'package:testing_2/theme.dart';
 
-import '../../../widgets/custom_button.dart';
-import '../../../widgets/input_field.dart';
+import '../../../app/widgets/custom_button.dart';
+import '../../../app/widgets/custom_text_field.dart';
 
 class EditCustomer extends StatefulWidget {
   // final TextEditingController input1;
@@ -28,20 +29,18 @@ class _EditCustomerState extends State<EditCustomer> {
 
   late ModelCustomer model;
 
-  Future<int> editCustomer() async {
-    ModelCustomer modelCustomer = ModelCustomer(
-      idCustomer: model.idCustomer,
-      nameCustomer: input1.text,
-      phoneCustomer: input2.text,
-      creditCustomer: input3.text,
-    );
-    return (await CustomerService().updateCustomer(modelCustomer)) as int;
-  }
+  // Future<int> editCustomer() async {
+  //   ModelCustomer modelCustomer = ModelCustomer(
+  //     idCustomer: model.idCustomer,
+  //     nameCustomer: input1.text,
+  //     phoneCustomer: input2.text,
+  //     creditCustomer: input3.text,
+  //   );
+  //   return (await CustomerService().updateCustomer(modelCustomer)) as int;
+  // }
 
   @override
   Widget build(BuildContext context) {
-    final customerBloc = BlocProvider.of<CustomerBloc>(context);
-    // final List<TextEditingController> myControllers = ModalRoute.of(context)!
     model = ModalRoute.of(context)!.settings.arguments as ModelCustomer;
     input1 = TextEditingController(text: model.nameCustomer);
     input2 = TextEditingController(text: model.phoneCustomer);
@@ -50,12 +49,13 @@ class _EditCustomerState extends State<EditCustomer> {
         listener: (context, state) {
           if (state.status.isSuccess) {
             input1.text = input2.text = input3.text = '';
-            customSnackBar(context, 'The modifications has been saved');
+            customSnackBar(
+                context, 'The modifications Customer has been saved');
             context.read<CustomerBloc>().add(const AllCustomersEvent());
             Navigator.pushReplacementNamed(context, Name.iDAllCustomer);
           } else if (state.status.isError) {
-            customSnackBar(
-                context, 'An error occurred saving the modifications');
+            customSnackBar(context,
+                'An error occurred saving the modifications to Customer');
           }
         },
         child: Scaffold(
@@ -78,7 +78,7 @@ class _EditCustomerState extends State<EditCustomer> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
-                InputField1(
+                CustomTextField(
                   title: 'Name Customer',
                   onChange: (value) => context
                       .read<CustomerBloc>()
@@ -86,7 +86,7 @@ class _EditCustomerState extends State<EditCustomer> {
                   controller: input1,
                 ),
                 const SizedBox(height: 8),
-                InputField1(
+                CustomTextField(
                   title: 'Phone Customer',
                   onChange: (value) => context
                       .read<CustomerBloc>()
@@ -94,7 +94,7 @@ class _EditCustomerState extends State<EditCustomer> {
                   controller: input2,
                 ),
                 const SizedBox(height: 8),
-                InputField1(
+                CustomTextField(
                   title: 'Credit',
                   onChange: (value) => context
                       .read<CustomerBloc>()
@@ -109,17 +109,25 @@ class _EditCustomerState extends State<EditCustomer> {
                     textColor: Colors.white,
                     backgroundColor: Themes.backgroundColorButton,
                     fontSize: 18,
-                    // onPressed: () => context.read<CustomerBloc>()
-                    onPressed: () => customerBloc.add(
-                      UpdateCustomerEvent(
-                        updateCustomer: ModelCustomer(
-                          idCustomer: model.idCustomer,
-                          nameCustomer: input1.text,
-                          phoneCustomer: input2.text,
-                          creditCustomer: input3.text,
+                    onPressed: () => context.read<CustomerBloc>().add(
+                          UpdateCustomerEvent(
+                            updateCustomer: ModelCustomer(
+                              idCustomer: model.idCustomer,
+                              nameCustomer: input1.text,
+                              phoneCustomer: input2.text,
+                              creditCustomer: input3.text,
+                            ),
+                          ),
+                          // onPressed: () => customerBloc.add(
+                          //   UpdateCustomerEvent(
+                          //     updateCustomer: ModelCustomer(
+                          //       idCustomer: model.idCustomer,
+                          //       nameCustomer: input1.text,
+                          //       phoneCustomer: input2.text,
+                          //       creditCustomer: input3.text,
+                          //     ),
+                          //   ),
                         ),
-                      ),
-                    ),
                   ),
                 ),
               ],

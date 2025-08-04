@@ -1,34 +1,10 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'customer_bloc.dart';
 
-// enum AppStatus { initial, success, error, loading }
 
-// extension AppStatusX on AppStatus {
-//   bool get isInitial => this == AppStatus.initial;
-//   bool get isSuccess => this == AppStatus.success;
-//   bool get isError => this == AppStatus.error;
-//   bool get isLoading => this == AppStatus.loading;
-// }
-
-enum CustomerStatus { initial, success, error, loading, loaded }
-
-extension CustomerStatusX on CustomerStatus {
-  bool get isInitial => this == CustomerStatus.initial;
-  bool get isSuccess => this == CustomerStatus.success;
-  bool get isError => this == CustomerStatus.error;
-  bool get isLoading => this == CustomerStatus.loading;
-  bool get isLoaded => this == CustomerStatus.loaded;
-}
-
-@immutable
-abstract class CustomerState1 extends Equatable {
-  const CustomerState1();
-  @override
-  List<Object?> get props => [];
-}
 
 class CustomerState extends Equatable {
-  final CustomerStatus status;
+  // final CustomerStatus status;
+  final AppStatus status;
   final int idCustomer;
   final String? nameCustomer;
   final String? phoneCustomer;
@@ -40,7 +16,8 @@ class CustomerState extends Equatable {
   final List<ModelCustomer> searchCustomer;
 
   const CustomerState({
-    this.status = CustomerStatus.initial,
+    // this.status = CustomerStatus.initial,
+    this.status = AppStatus.initial,
     this.idCustomer = 0,
     this.nameCustomer,
     this.phoneCustomer,
@@ -52,11 +29,12 @@ class CustomerState extends Equatable {
     this.searchCustomer = const <ModelCustomer>[],
   });
   CustomerState copyWith({
+    // CustomerStatus? status,
+    AppStatus? status,
     int? idCustomer,
     String? nameCustomer,
     String? phoneCustomer,
     String? creditCustomer,
-    CustomerStatus? status,
     ModelCustomer? addCustomer,
     ModelCustomer? deleteCustomer,
     ModelCustomer? updateCustomer,
@@ -92,42 +70,42 @@ class CustomerState extends Equatable {
       ];
 }
 
-class CustomerInitial extends CustomerState {}
+// class CustomerInitial extends CustomerState {}
 
-class LoadingState extends CustomerState {
-  @override
-  List<Object?> get props => [];
-}
+// class LoadingState extends CustomerState {
+//   @override
+//   List<Object?> get props => [];
+// }
 
-class LoadedState extends CustomerState {
-  final List<ModelCustomer> allCustomerList;
+// class LoadedState extends CustomerState {
+//   final List<ModelCustomer> allCustomerList;
 
-  const LoadedState({this.allCustomerList = const <ModelCustomer>[]});
+//   const LoadedState({this.allCustomerList = const <ModelCustomer>[]});
 
-  @override
-  List<Object> get props => [allCustomerList];
-}
+//   @override
+//   List<Object> get props => [allCustomerList];
+// }
 
-class SearchState extends CustomerState {
-  final List<ModelCustomer> searchCustomerList;
+// class SearchState extends CustomerState {
+//   final List<ModelCustomer> searchCustomerList;
 
-  const SearchState({this.searchCustomerList = const <ModelCustomer>[]});
+//   const SearchState({this.searchCustomerList = const <ModelCustomer>[]});
 
-  @override
-  List<Object> get props => [searchCustomerList];
-}
+//   @override
+//   List<Object> get props => [searchCustomerList];
+// }
 
-class ErrorState extends CustomerState {
-  final String? errorMessage;
+// class ErrorState extends CustomerState {
+//   final String? errorMessage;
 
-  const ErrorState({this.errorMessage});
-  @override
-  List<Object?> get props => [errorMessage];
-}
+//   const ErrorState({this.errorMessage});
+//   @override
+//   List<Object?> get props => [errorMessage];
+// }
 
-class SuccessState extends CustomerState {
-  // final ModelCustomer modelCustomer;
-  // SuccessState({required this.modelCustomer});
-  @override
-  List<Object?> get props => [];
-}
+// class SuccessState extends CustomerState {
+//   // final ModelCustomer modelCustomer;
+//   // SuccessState({required this.modelCustomer});
+//   @override
+//   List<Object?> get props => [];
+// }

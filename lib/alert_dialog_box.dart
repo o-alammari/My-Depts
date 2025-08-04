@@ -1,73 +1,243 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:testing_2/app/function/app_status.dart';
+import 'package:testing_2/app/function/custom_snack_bar.dart';
 
-import 'package:testing_2/model/model_customer.dart';
+import 'package:testing_2/presentation/customer/view-model/bloc/customer_bloc.dart';
 import 'package:testing_2/theme.dart';
 
-class MyDialog extends StatefulWidget {
-  @override
-  _MyDialogState createState() => _MyDialogState();
-}
-
-class _MyDialogState extends State<MyDialog> {
-  List<String> names = [
-    "محمد",
-    "أحمد",
-    "علي",
-    "عبد الله",
-    "حسن",
-    "عمر",
-    "فاطمة",
-    "عائشة",
-    "مريم"
-  ];
-
-  String searchText = "";
+class DialogBox extends StatelessWidget {
+  const DialogBox({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      child: Container(
-        width: 200,
-        height: 200,
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "بحث الأسماء",
-              style: TextStyle(fontSize: 20),
+    return BlocConsumer<CustomerBloc, CustomerState>(
+      listener: (context, state) {
+        if (state.status.isLoaded) {
+          // customSnackBar(context, ' isLoaded Customer');
+        } else if (state.status.isError) {
+          customSnackBar(context, 'Type Error => sError Not Customer');
+        }
+      },
+      builder: (context, state) {
+        return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0),
             ),
-            TextField(
-              decoration: InputDecoration(
-                hintText: "أدخل اسمًا للبحث",
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height * 0.9,
+              child: SingleChildScrollView(
+                // physics: ScrollPhysics(),
+                child: state.status.isLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : state.status.isLoaded
+                        ? Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 16, left: 16, right: 16, bottom: 16),
+                                child: Container(
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: Colors.grey[400],
+                                    // color: Colors.white,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      const SizedBox(width: 8),
+                                      const Icon(Icons.search,
+                                          color: Colors.grey),
+                                      const SizedBox(width: 8),
+                                      Expanded(
+                                        child: TextField(
+                                          decoration:
+                                              const InputDecoration.collapsed(
+                                            hintText: 'Search',
+                                          ),
+                                          onChanged: (value) =>
+                                              context.read<CustomerBloc>().add(
+                                                    CustomerSearchChangedEvent(
+                                                      customerSearch: value,
+                                                    ),
+                                                  ),
+                                          // onTap: () => Navigator.pushNamed(
+                                          //     context, Name.iDSearchScreenCustomers),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                // itemCount: searchResults.length,
+                                itemCount: context
+                                    .read<CustomerBloc>()
+                                    .state
+                                    .searchCustomer
+                                    .length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  
+                                  return Column(
+                                    children: [
+                                      ListTile(
+                                        leading: const Icon(Icons.person),
+                                        title: Text(
+                                          // searchResults[index].nameCustomer,
+                                          context
+                                              .read<CustomerBloc>()
+                                              .state
+                                              .searchCustomer[index]
+                                              .nameCustomer,
+                                          style: titleStyle,
+                                          // style: TextStyle(fontSize: 20),
+                                        ),
+                                        onTap: () {
+                                          // setState(() {
+                                          //   selectedTitle =
+                                          //       searchResults[index].nameCustomer;
+                                          // });
+                                          // Navigator.pop(context, selectedTitle);
+                                          Navigator.pop(
+                                              context,
+                                              context
+                                                  .read<CustomerBloc>()
+                                                  .state
+                                                  .searchCustomer[index]
+                                                  .nameCustomer);
+                                        },
+                                        // style: ,
+                                      ),
+                                      const Divider(
+                                        height: 5,
+                                        thickness: 1,
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ),
+                            ],
+                          )
+                        : Column(
+                            // physics: const BouncingScrollPhysics(),
+                            // mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 16, left: 16, right: 16, bottom: 16),
+                                child: Container(
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: Colors.grey[400],
+                                    // color: Colors.white,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      const SizedBox(width: 8),
+                                      const Icon(Icons.search,
+                                          color: Colors.grey),
+                                      const SizedBox(width: 8),
+                                      Expanded(
+                                        child: TextField(
+                                          decoration:
+                                              const InputDecoration.collapsed(
+                                            hintText: 'Search',
+                                          ),
+                                          onChanged: (value) => context
+                                              .read<CustomerBloc>()
+                                              .add(CustomerSearchChangedEvent(
+                                                customerSearch: value,
+                                              )),
+                                          // onTap: () => Navigator.pushNamed(
+                                          //     context, Name.iDSearchScreenCustomers),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                // : const Center(
+                //     child: Text('Not Found'),
+                //   ),
               ),
-              onChanged: (text) {
-                setState(() {
-                  searchText = text;
-                });
-              },
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: names.length,
-                itemBuilder: (context, index) {
-                  String name = names[index];
-                  bool isMatch =
-                      name.toLowerCase().contains(searchText.toLowerCase());
-                  return ListTile(
-                    title: Text(name),
-                    enabled: isMatch,
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
+            ));
+      },
     );
   }
 }
+
+
+// class MyDialog extends StatefulWidget {
+//   @override
+//   _MyDialogState createState() => _MyDialogState();
+// }
+
+// class _MyDialogState extends State<MyDialog> {
+//   List<String> names = [
+//     "محمد",
+//     "أحمد",
+//     "علي",
+//     "عبد الله",
+//     "حسن",
+//     "عمر",
+//     "فاطمة",
+//     "عائشة",
+//     "مريم"
+//   ];
+//   String searchText = "";
+//   @override
+//   Widget build(BuildContext context) {
+//     return Dialog(
+//       child: Container(
+//         width: 200,
+//         height: 200,
+//         child: Column(
+//           // mainAxisAlignment: MainAxisAlignment.center,
+//           children: [
+//             Text(
+//               "بحث الأسماء",
+//               style: TextStyle(fontSize: 20),
+//             ),
+//             TextField(
+//               decoration: InputDecoration(
+//                 hintText: "أدخل اسمًا للبحث",
+//               ),
+//               onChanged: (text) {
+//                 setState(() {
+//                   searchText = text;
+//                 });
+//               },
+//             ),
+//             Expanded(
+//               child: ListView.builder(
+//                 itemCount: names.length,
+//                 itemBuilder: (context, index) {
+//                   String name = names[index];
+//                   bool isMatch =
+//                       name.toLowerCase().contains(searchText.toLowerCase());
+//                   return ListTile(
+//                     title: Text(name),
+//                     enabled: isMatch,
+//                   );
+//                 },
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+
 // class MyDialog extends StatefulWidget {
 //   @override
 //   _MyDialogState createState() => _MyDialogState();
@@ -180,132 +350,6 @@ class _MyDialogState extends State<MyDialog> {
 //   }
 // }
 
-class DialogBox_1 extends StatefulWidget {
-  List<ModelCustomer> names;
-  DialogBox_1({
-    Key? key,
-    required this.names,
-  }) : super(key: key);
-
-  @override
-  State<DialogBox_1> createState() => _DialogBox_1State();
-}
-
-class _DialogBox_1State extends State<DialogBox_1> {
-  bool showResults = false;
-  String? selectedTitle;
-  // List<ModelCustomer> names = [];
-
-  List<ModelCustomer> searchResults = [];
-
-  void search(String query) {
-    if (query.isEmpty) {
-      setState(() {
-        // showResults = false;
-        searchResults = widget.names;
-      });
-    } else {
-      // List<ModelCustomer> results = modelList!.where((customer) {
-      searchResults = widget.names.where((customer) {
-        return customer.nameCustomer
-            .toLowerCase()
-            .contains(query.toLowerCase());
-      }).toList();
-      showResults = true;
-      setState(() {
-        // searchResults = results;
-      });
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    searchResults = widget.names;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // title: const Text("Select Data"),
-    // content: Column(
-    return Dialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height * 0.9,
-          child: SingleChildScrollView(
-            // physics: ScrollPhysics(),
-            child: Column(
-              // physics: const BouncingScrollPhysics(),
-              // mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 16, left: 16, right: 16, bottom: 16),
-                  child: Container(
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.grey[400],
-                      // color: Colors.white,
-                    ),
-                    child: Row(
-                      children: [
-                        const SizedBox(width: 8),
-                        const Icon(Icons.search, color: Colors.grey),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: TextField(
-                            decoration: const InputDecoration.collapsed(
-                              hintText: 'Search',
-                            ),
-                            onChanged: (value) => search(value),
-                            // onTap: () => Navigator.pushNamed(
-                            //     context, Name.iDSearchScreenCustomers),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: searchResults.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Column(
-                      children: [
-                        ListTile(
-                          leading: const Icon(Icons.person),
-                          title: Text(
-                            // searchResults[index].nameCustomer,
-                            widget.names[index].nameCustomer,
-                            style: titleStyle,
-                            // style: TextStyle(fontSize: 20),
-                          ),
-                          onTap: () {
-                            setState(() {
-                              selectedTitle = searchResults[index].nameCustomer;
-                            });
-                            Navigator.pop(context, selectedTitle);
-                          },
-                          // style: ,
-                        ),
-                        const Divider(
-                          height: 5,
-                          thickness: 1,
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
-        ));
-  }
-}
 
 // //alertDialogBox.dart
 // class DialogBox_2 {

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:testing_2/app/function/app_status.dart';
 import 'package:testing_2/model/model_customer.dart';
 import 'package:testing_2/presentation/customer/view-model/bloc/customer_bloc.dart';
 
 import '../../../theme.dart';
-import 'package:testing_2/widgets/custom_button.dart';
-import 'package:testing_2/function/custom_snack_bar.dart';
-import '../../../widgets/input_field.dart';
+import 'package:testing_2/app/widgets/custom_button.dart';
+import 'package:testing_2/app/function/custom_snack_bar.dart';
+import '../../../app/widgets/custom_text_field.dart';
 
 class AddCustomerView extends StatelessWidget {
   AddCustomerView({super.key});
@@ -81,7 +82,7 @@ class AddCustomerView extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
-                InputField1(
+                CustomTextField(
                   title: 'Name Customer',
                   hint: 'Enter Name',
                   onChange: (value) {
@@ -95,22 +96,18 @@ class AddCustomerView extends StatelessWidget {
                   // errorText1: (stateB is ErrorState) ? 'Invalid Name' : null,
                 ),
                 const SizedBox(height: 8),
-                InputField1(
+                CustomTextField(
                   title: 'Phone',
                   hint: '7_ _ _ _ _ _',
-                  onChange: (value) {
-                    context
-                        .read<CustomerBloc>()
-                        .add(CustomerPhoneChangedEvent(customerPhone: value));
-                    // customerBloc
-                    //   .add(CustomerPhoneChangedEvent(customerPhone: value));
-                  },
+                  onChange: (value) => context
+                      .read<CustomerBloc>()
+                      .add(CustomerPhoneChangedEvent(customerPhone: value)),
                   controller: input2,
                   textInputType: TextInputType.number,
                   // errorText1: (stateB is ErrorState) ? 'Invalid Phone' : null,
                 ),
                 const SizedBox(height: 8),
-                InputField1(
+                CustomTextField(
                   title: 'Credit',
                   hint: '0',
                   onChange: (value) {

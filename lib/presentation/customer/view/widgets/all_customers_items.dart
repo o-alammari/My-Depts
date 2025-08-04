@@ -3,26 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:testing_2/constant.dart';
 import 'package:testing_2/model/model_customer.dart';
 import 'package:testing_2/presentation/customer/view-model/bloc/customer_bloc.dart';
+import 'package:testing_2/presentation/procedure/view-model/bloc_procedure/procedure_bloc.dart';
 import 'package:testing_2/services/customers_service.dart';
 import 'package:testing_2/theme.dart';
 
 class AllCustomersItems extends StatelessWidget {
-  // const AllCustomerItem({super.key});
   ModelCustomer? modelCustomer;
-  // TextEditingController input1;
-  // TextEditingController input2;
-  // TextEditingController input3;
-  Function() onDeletePress;
-  Function() onEditPress;
 
-  AllCustomersItems(
-      {required this.modelCustomer,
-      // required this.input1,
-      // required this.input2,
-      // required this.input3,
-      required this.onDeletePress,
-      required this.onEditPress,
-      super.key});
+  AllCustomersItems({required this.modelCustomer, super.key});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -111,9 +99,12 @@ class AllCustomersItems extends StatelessWidget {
                         color: Colors.blue,
                       ),
                       onTap: () {
+                        context.read<ProcedureBloc>().add(AllProceduresEvent(
+                            customerId: modelCustomer!.idCustomer!));
+
                         Navigator.of(context).pop();
                         Navigator.pushNamed(context, Name.iDAllProcedures,
-                            arguments: modelCustomer);
+                            arguments: modelCustomer!.idCustomer);
                       },
                     ),
                   ],
@@ -226,7 +217,7 @@ class AllCustomersItems extends StatelessWidget {
                         style: TextStyle(color: Colors.red),
                       ),
                       trailing: const Icon(Icons.delete, color: Colors.red),
-                      // onTap: () => widget.onDeletePress,
+
                       onTap: () {
                         context.read<CustomerBloc>().add(DeleteCustomerEvent(
                             idCustomer: modelCustomer!.idCustomer!));

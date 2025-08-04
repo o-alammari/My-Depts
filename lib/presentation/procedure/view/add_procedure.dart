@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testing_2/function/custom_snack_bar.dart';
+import 'package:testing_2/app/function/custom_snack_bar.dart';
 import 'package:testing_2/model/model_customer.dart';
 import 'package:testing_2/model/model_procedures.dart';
+import 'package:testing_2/presentation/customer/view-model/bloc/customer_bloc.dart';
 import 'package:testing_2/presentation/procedure/view-model/bloc_procedure/procedure_bloc.dart';
 import 'package:testing_2/services/customers_service.dart';
 import 'package:testing_2/services/procedures_service.dart';
-import 'package:testing_2/widgets/custom_button.dart';
-import 'package:testing_2/widgets/select_box.dart';
-
+import 'package:testing_2/app/widgets/custom_button.dart';
+import 'package:testing_2/app/widgets/select_box.dart';
+import 'package:flutter_sms/flutter_sms.dart';
 import '../../../theme.dart';
-import '../../../widgets/input_field.dart';
+import '../../../app/widgets/custom_text_field.dart';
 
 class AddProcedure extends StatefulWidget {
   const AddProcedure({super.key});
@@ -20,63 +21,34 @@ class AddProcedure extends StatefulWidget {
 }
 
 class _AddProcedureState extends State<AddProcedure> {
-  late List<ModelCustomer> nameCustomer = <ModelCustomer>[];
   TextEditingController input1 = TextEditingController();
   TextEditingController input2 = TextEditingController();
   late int idCustomer;
-  late String type;
-  // bool isLoading = false;
   GlobalKey<FormState> formKey = GlobalKey();
-  // int idCustomer
-  Future<int> addProcedure() async {
-    print(type);
-    ModelProcedures modelProcedure = ModelProcedures(
-      idCustomer: idCustomer,
-      dateProcedures: DateTime.now().toString(),
-      nameProcedures: input1.text,
-      credit: type == 'Credit' ? input2.text : '0',
-      debit: type == 'Debit' ? input2.text : '0',
-    );
-    return (await ProceduresServices().saveProcedures(modelProcedure)) as int;
-  }
-
-  Future<void> readDataAllCustomers() async {
-    var list = await CustomerService().readAllCustomers();
-    list.forEach(
-      (json) {
-        var model = ModelCustomer(
-          idCustomer: json['id'],
-          nameCustomer: json['nameCustomer'],
-          phoneCustomer: json['phoneCustomer'],
-          creditCustomer: json['creditCustomer'],
-        );
-        nameCustomer.add(model);
-        setState(() {});
-      },
-    );
-  }
 
   @override
   void initState() {
     super.initState();
-    readDataAllCustomers();
+    context.read<CustomerBloc>().add(const AllCustomersEvent());
   }
 
-  // List<String> nameCustomer = ['omar', 'omar2'];
   @override
   Widget build(BuildContext context) {
-    type = ModalRoute.of(context)!.settings.arguments as String;
+    var type = ModalRoute.of(context)!.settings.arguments as String;
     return BlocListener<ProcedureBloc, ProcedureState>(
       listener: (context, state) {
-          if (state is LoadingState) {
-            
-          }
-          else if (state is SuccessState) {
-            
-          }
-          // else if()
-        },
-      
+        if (state.status.isSuccess) {
+          input1.text = input2.text = '';
+          customSnackBar(context, 'Success ');
+          context
+              .read<ProcedureBloc>()
+              .add(AllProceduresEvent(customerId: idCustomer));
+        } else if (state.status.isError) {
+          // customSnackBar(context, 'Type Error ${state.errorMessage}');
+          customSnackBar(
+              context, 'Type Error => on save Failure Please Enter Value');
+        }
+      },
       child: Scaffold(
         backgroundColor: Themes.backgroundColor,
         appBar: AppBar(
@@ -106,67 +78,35 @@ class _AddProcedureState extends State<AddProcedure> {
                 const SizedBox(height: 12),
                 Text('Customer', style: titleStyle),
                 SelectBox(
-                  nameCustomer: nameCustomer,
                   onResult: (result) {
-                    // print(result);
-                    idCustomer = nameCustomer
+                    idCustomer = context
+                        .read<CustomerBloc>()
+                        .state
+                        .allCustomer
                         .firstWhere((element) => element.nameCustomer == result)
                         .idCustomer!;
-                    // print(idCustomer);
+                    print(idCustomer);
                   },
                 ),
                 const SizedBox(height: 5),
-                InputField1(
+                CustomTextField(
                   title: 'Name Procedure',
                   hint: 'Enter Procedure',
-                  onChange: (p0) {},
                   controller: input1,
+                  onChange: (value) => context
+                      .read<ProcedureBloc>()
+                      .add(ProcedureNameChangedEvent(procedureName: value)),
                 ),
                 const SizedBox(height: 8),
-                InputField1(
+                CustomTextField(
                   title: 'Amount Procedure',
                   hint: 'Enter Amount',
-                  onChange: (p0) {},
                   controller: input2,
+                  onChange: (value) => context
+                      .read<ProcedureBloc>()
+                      .add(ProcedureAmountChangedEvent(procedureAmount: value)),
                 ),
                 const SizedBox(height: 20),
-                // Text('title', style: titleStyle),
-                // const SizedBox(height: 12),
-                // Padding(
-                //   padding: const EdgeInsets.only(left: 16, right: 16),
-                //   child: Container(
-                //     height: 100,
-                //     decoration: BoxDecoration(
-                //       boxShadow: [
-                //         BoxShadow(
-                //           blurRadius: 40,
-                //           color: Colors.grey.withOpacity(.6),
-                //           spreadRadius: 0,
-                //           offset: const Offset(10, 10),
-                //         ),
-                //       ],
-                //       // color: Colors.grey,
-                //       // color: Color.fromARGB(255, 227, 231, 227),
-                //       color: const Color.fromARGB(255, 227, 231, 227),
-                //       borderRadius: BorderRadius.circular(12),
-                //     ),
-                //     child: ListView.builder(
-                //       itemCount: nameCustomer.length,
-                //       itemBuilder: (context, index) => Column(
-                //         children: [
-                //           ListTile(
-                //             title: Text(
-                //               nameCustomer[index],
-                //             ),
-                //           ),
-                //           const Divider()
-                //         ],
-                //       ),
-                //     ),
-                //   ),
-                // ),
-
-                // const SizedBox(height: 15),
                 Center(
                   child: CustomButton(
                     text: 'Save',
@@ -174,17 +114,61 @@ class _AddProcedureState extends State<AddProcedure> {
                     textColor: Colors.white,
                     fontSize: 18,
                     onPressed: () async {
-                      var result = await addProcedure();
-                      customSnackBar(
-                          context, 'Add to Customer Success ${result}');
+                      String message = "This is a test message!";
+                      List<String> recipents = [
+                        "00967713713392",
+                        "+967713713392"
+                      ];
+
+                      String result = await sendSMS(
+                              message: message,   
+                              recipients: recipents,
+                              sendDirect: true)
+                          .catchError((onError) {
+                        print(onError);
+                      });
+                      print(result);
+
+
+  //  SmsSender sender = SmsSender();
+    String address = "1234567";
+
+    // SmsMessage message = SmsMessage(address, 'Hello flutter!');
+    // message.onStateChanged.listen((state) {
+    //   if (state == SmsMessageState.Sent) {
+    //     print("SMS is sent!");
+    //     setState(() {
+    //       _message = "SMS is sent";
+    //     });
+    //   } else if (state == SmsMessageState.Delivered) {
+    //     print("SMS is delivered!");
+    //     setState(() {
+    //       _message = "SMS is delivered!";
+    //     });
+    //   }
+    // });
+    // sender.sendSms(message);
+                      // var re = await ProceduresServices()
+                      //     .readAllProceduresCustomerSum(1);
+                      // print(re);
+                      // context.read<ProcedureBloc>().add(
+                      //       AddProcedureEvent(
+                      //         addProcedure: ModelProcedures(
+                      //           idCustomer: idCustomer,
+                      //           nameProcedures: input1.text,
+                      //           dateProcedures: DateTime.now().toString(),
+                      //           credit: type == 'Credit'
+                      //               ? int.parse(input2.text)
+                      //               : 0,
+                      //           debit: type == 'Debit'
+                      //               ? int.parse(input2.text)
+                      //               : 0,
+                      //         ),
+                      //       ),
+                      //     );
                     },
                   ),
                 )
-                // const SizedBox(height: 12),
-                // MyButton(
-                //   lable: 'Save',
-                //   onTap: () {},
-                // ),
               ],
             ),
           ),

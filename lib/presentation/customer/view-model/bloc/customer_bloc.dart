@@ -1,23 +1,18 @@
 import 'dart:developer';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+import 'package:testing_2/app/function/app_status.dart';
 import 'package:testing_2/model/model_customer.dart';
 import 'package:testing_2/services/customers_service.dart';
+import 'package:testing_2/app/function/valid.dart';
 
 part 'customer_event.dart';
 part 'customer_state.dart';
 
 class CustomerBloc extends Bloc<CustomerEvents, CustomerState> {
-  // bool isValidName = false;
-  // bool isValidPhone = false;
-  // bool isValidCredit = false;
-  //  bool isValidName=false;
-  // late bool isValidPhone;
-  // late bool isValidCredit;
   CustomerService customerService = CustomerService();
-  // List<ModelCustomer> modelCustomerList = <ModelCustomer>[];
   CustomerBloc() : super(const CustomerState()) {
     on<CustomerNameChangedEvent>(_onUsernameChanged);
     on<CustomerPhoneChangedEvent>(_onCustomerPhoneChanged);
@@ -83,9 +78,9 @@ class CustomerBloc extends Bloc<CustomerEvents, CustomerState> {
     AddCustomerEvent event,
     Emitter<CustomerState> emit,
   ) async {
-    final isValidNameCustomer = _isValid(state.nameCustomer);
-    final isValidPhoneCustomer = _isValid(state.phoneCustomer);
-    final isValidCreditCustomer = _isValid(state.creditCustomer);
+    final isValidNameCustomer = isValid(state.nameCustomer);
+    final isValidPhoneCustomer = isValid(state.phoneCustomer);
+    final isValidCreditCustomer = isValid(state.creditCustomer);
     if (isValidNameCustomer && isValidPhoneCustomer && isValidCreditCustomer) {
       print(
           'True Check value success => ${state.nameCustomer} ${state.phoneCustomer} ${state.creditCustomer}');
@@ -93,10 +88,10 @@ class CustomerBloc extends Bloc<CustomerEvents, CustomerState> {
       print('${re}');
       emit(
         state.copyWith(
-            addCustomer: event.addCustomer, status: CustomerStatus.success),
+            addCustomer: event.addCustomer, status: AppStatus.success),
       );
     } else {
-      emit(state.copyWith(status: CustomerStatus.error));
+      emit(state.copyWith(status: AppStatus.error));
     }
   }
 
@@ -104,9 +99,9 @@ class CustomerBloc extends Bloc<CustomerEvents, CustomerState> {
     UpdateCustomerEvent event,
     Emitter<CustomerState> emit,
   ) async {
-    final isValidNameCustomer = _isValid(state.nameCustomer);
-    final isValidPhoneCustomer = _isValid(state.phoneCustomer);
-    final isValidCreditCustomer = _isValid(state.creditCustomer);
+    final isValidNameCustomer = isValid(state.nameCustomer);
+    final isValidPhoneCustomer = isValid(state.phoneCustomer);
+    final isValidCreditCustomer = isValid(state.creditCustomer);
     if (isValidNameCustomer && isValidPhoneCustomer && isValidCreditCustomer) {
       print(
           'True Check value success => ${state.nameCustomer} ${state.phoneCustomer} ${state.creditCustomer}');
@@ -116,14 +111,14 @@ class CustomerBloc extends Bloc<CustomerEvents, CustomerState> {
         emit(
           state.copyWith(
               updateCustomer: event.updateCustomer,
-              status: CustomerStatus.success),
+              status: AppStatus.success),
         );
       } on Exception catch (e) {
         print(e);
-        emit(state.copyWith(status: CustomerStatus.error));
+        emit(state.copyWith(status: AppStatus.error));
       }
     } else {
-      emit(state.copyWith(status: CustomerStatus.error));
+      emit(state.copyWith(status: AppStatus.error));
     }
   }
 
@@ -135,17 +130,17 @@ class CustomerBloc extends Bloc<CustomerEvents, CustomerState> {
       await customerService.deleteCustomer(event.idCustomer);
       emit(
         state.copyWith(
-            idCustomer: event.idCustomer, status: CustomerStatus.success),
+            idCustomer: event.idCustomer, status: AppStatus.success),
       );
       // _allCustomersEvent(const AllCustomersEvent(), emit);
     } on Exception catch (_) {
-      emit(state.copyWith(status: CustomerStatus.error));
+      emit(state.copyWith(status: AppStatus.error));
     }
   }
 
   void _allCustomersEvent(
       AllCustomersEvent event, Emitter<CustomerState> emit) async {
-    emit(state.copyWith(status: CustomerStatus.loading));
+    emit(state.copyWith(status: AppStatus.loading));
     try {
       var list = await customerService.readAllCustomers();
       var list2 = <ModelCustomer>[];
@@ -153,11 +148,11 @@ class CustomerBloc extends Bloc<CustomerEvents, CustomerState> {
         list2.add(ModelCustomer.fromJson(json));
       });
       emit(
-        state.copyWith(allCustomer: list2, status: CustomerStatus.loaded),
+        state.copyWith(allCustomer: list2, status: AppStatus.loaded),
       );
       print(state.allCustomer.length);
     } catch (e) {
-      emit(state.copyWith(status: CustomerStatus.error));
+      emit(state.copyWith(status: AppStatus.error));
     }
   }
 
@@ -165,7 +160,7 @@ class CustomerBloc extends Bloc<CustomerEvents, CustomerState> {
       CustomerSearchChangedEvent event, Emitter<CustomerState> emit) async {
     if (event.customerSearch == '') {
       emit(state.copyWith(
-          searchCustomer: state.allCustomer, status: CustomerStatus.loaded));
+          searchCustomer: state.allCustomer, status: AppStatus.loaded));
     } else {
       var list = state.allCustomer
           .where((customer) => customer.nameCustomer
@@ -173,20 +168,26 @@ class CustomerBloc extends Bloc<CustomerEvents, CustomerState> {
               .contains(event.customerSearch!.toLowerCase()))
           .toList();
       if (event.customerSearch == null) {
-        emit(state.copyWith(status: CustomerStatus.error));
+        emit(state.copyWith(status: AppStatus.error));
       } else {
         if (list.isEmpty) {
           print('isEmpty');
           emit(
-              state.copyWith(searchCustomer: [], status: CustomerStatus.error));
+              state.copyWith(searchCustomer: [], status: AppStatus.error));
         } else {
           print('True search');
           emit(
-            state.copyWith(searchCustomer: list, status: CustomerStatus.loaded),
+            state.copyWith(searchCustomer: list, status: AppStatus.loaded),
           );
         }
       }
     }
+  }
+
+  @override
+  void onTransition(Transition<CustomerEvents, CustomerState> transition) {
+    super.onTransition(transition);
+    print(transition);
   }
 
   Stream<CustomerState> fetchAllCustomers() async* {
@@ -201,7 +202,7 @@ class CustomerBloc extends Bloc<CustomerEvents, CustomerState> {
     // // print(state.allCustomer);
     // // emit(state.copyWith(allCustomer: list));
   }
-
+}
   // yield SuccessState();
   // CustomerService customerService = CustomerService();
   // customerService = CustomerService();
@@ -306,7 +307,6 @@ class CustomerBloc extends Bloc<CustomerEvents, CustomerState> {
   //     yield LoadingState();
 
   //     try {
-
   //       final userModel = ModelCustomer(nameCustomer: event.customerName, phoneCustomer: phoneCustomer, creditCustomer: creditCustomer)
   //       await _userRepository.addUser(userModel);
   //       await customerService.saveCustomer();
@@ -320,10 +320,3 @@ class CustomerBloc extends Bloc<CustomerEvents, CustomerState> {
 
   // }
 
-  bool _isValid(String? text) {
-    if (text == null) {
-      return false;
-    }
-    return text.isNotEmpty;
-  }
-}
