@@ -39,6 +39,7 @@ _(You can add more screenshots or a demo GIF to better showcase the app)_
 ---
 
 ## 📂 Project Structure
+```
 ├── lib/
 │   ├── app/
 │   │   ├── function/
@@ -122,3 +123,4 @@ _(You can add more screenshots or a demo GIF to better showcase the app)_
 │       └── user_service.dart
 ├── pubspec.lock
 └── main.dart
+```
