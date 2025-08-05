@@ -13,15 +13,12 @@ import 'package:my_debts/app/widgets/custom_text_field_without_title.dart';
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
 
-  TextEditingController input1 = TextEditingController();
-
-  TextEditingController input2 = TextEditingController();
-
-  GlobalKey<FormState> formKey = GlobalKey();
+  final TextEditingController input1 = TextEditingController();
+  final TextEditingController input2 = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
-    var enable = false;
     return BlocConsumer<SignBloc, UserState>(
       listener: (context, state) {
         if (state.status.isSuccess) {
@@ -29,13 +26,10 @@ class SignInScreen extends StatelessWidget {
           customSnackBar(context, 'Sign in success');
           Navigator.of(context).pushReplacementNamed(Name.iDHomeScreen);
         } else if (state.status.isError) {
-          enable = true;
           customSnackBar(context,
               'SignIn => Error on username or password please try again');
         } else if (state.status.isInitial) {
-          enable = false;
         } else if (state.status.isLoading) {
-          enable = true;
         }
       },
       builder: (context, state) => Scaffold(

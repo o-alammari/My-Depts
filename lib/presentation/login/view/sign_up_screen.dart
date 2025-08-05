@@ -12,11 +12,9 @@ import 'package:my_debts/app/widgets/custom_text_field_without_title.dart';
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
 
-  TextEditingController input1 = TextEditingController();
-
-  TextEditingController input2 = TextEditingController();
-
-  GlobalKey<FormState> formKey = GlobalKey();
+  final TextEditingController input1 = TextEditingController();
+  final TextEditingController input2 = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {

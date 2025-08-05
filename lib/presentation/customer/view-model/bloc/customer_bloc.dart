@@ -86,7 +86,7 @@ class CustomerBloc extends Bloc<CustomerEvents, CustomerState> {
           state.copyWith(
               updateCustomer: event.updateCustomer, status: AppStatus.success),
         );
-      } on Exception catch (e) {
+      } on Exception {
         emit(state.copyWith(status: AppStatus.error));
       }
     } else {

@@ -48,7 +48,7 @@ class SignBloc extends Bloc<SignEvents, UserState> {
     final isValidNameUser = isValid(state.userName);
     final isValidPassword = isValid(state.password);
     if (isValidNameUser && isValidPassword) {
-      var re = await userService.signUpUser(event.signUpUser!);
+      await userService.signUpUser(event.signUpUser!);
 
       emit(
         state.copyWith(signUpUser: event.signUpUser, status: AppStatus.success),

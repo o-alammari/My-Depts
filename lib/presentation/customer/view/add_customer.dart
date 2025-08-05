@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_debts/app/function/app_status.dart';
+import 'package:my_debts/app/function/custom_snack_bar.dart';
+import 'package:my_debts/app/utils/theme.dart';
+import 'package:my_debts/app/widgets/custom_button.dart';
+import 'package:my_debts/app/widgets/custom_text_field.dart';
 import 'package:my_debts/model/model_customer.dart';
 import 'package:my_debts/presentation/customer/view-model/bloc/customer_bloc.dart';
-
-import '../../../app/utils/theme.dart';
-import 'package:my_debts/app/widgets/custom_button.dart';
-import 'package:my_debts/app/function/custom_snack_bar.dart';
-import '../../../app/widgets/custom_text_field.dart';
 
 class AddCustomerView extends StatelessWidget {
   AddCustomerView({super.key});
 
-  TextEditingController input1 = TextEditingController();
-
-  TextEditingController input2 = TextEditingController();
-
-  TextEditingController input3 = TextEditingController();
-
-  GlobalKey<FormState> formKey = GlobalKey();
+  final TextEditingController input1 = TextEditingController();
+  final TextEditingController input2 = TextEditingController();
+  final TextEditingController input3 = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {

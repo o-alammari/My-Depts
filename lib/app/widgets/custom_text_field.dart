@@ -2,52 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:my_debts/app/utils/theme.dart';
 
-class InputField2 extends StatelessWidget {
-  InputField2({
-    required this.title,
-    required this.hint,
-    required this.onChange,
-    this.controller,
-    this.textInputType,
-    this.widget,
-    Key? key,
-  }) : super(key: key);
-  final String title;
-  final String hint;
-  Function(String)? onChange;
-
-  final TextEditingController? controller;
-  final TextInputType? textInputType;
-  final Widget? widget;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 14),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(title, style: titleStyle),
-          TextFormField(
-            keyboardType: textInputType ?? TextInputType.text,
-            decoration: InputDecoration(
-              hintText: hint,
-              enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              border: OutlineInputBorder(
-                borderSide: const BorderSide(),
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class CustomTextField extends StatefulWidget {
   const CustomTextField({
     Key? key,

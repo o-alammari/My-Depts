@@ -18,7 +18,7 @@ class SelectDate extends StatefulWidget {
 }
 
 class _SelectDateState extends State<SelectDate> {
-  DateTime _selectedDate = DateTime.now();
+  DateTime? _selectedDate = DateTime.now();
   String? selectedValue = 'Select ';
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class _SelectDateState extends State<SelectDate> {
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
                       _selectedDate != null
-                          ? DateFormat.yMd().format(_selectedDate)
+                          ? DateFormat.yMd().format(_selectedDate!)
                           : 'Select',
                       style: const TextStyle(
                         fontSize: 15,
