@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:share/share.dart';
 
-import 'package:testing_2/app/function/reports.dart';
-import 'package:testing_2/app/widgets/custom_button.dart';
-import 'package:testing_2/presentation/customer/view-model/bloc/customer_bloc.dart';
-import 'package:testing_2/services/procedures_service.dart';
-import 'package:testing_2/theme.dart';
+import 'package:my_debts/app/function/reports.dart';
+import 'package:my_debts/app/widgets/custom_button.dart';
+import 'package:my_debts/presentation/customer/view-model/bloc/customer_bloc.dart';
+import 'package:my_debts/services/procedures_service.dart';
+import 'package:my_debts/app/utils/theme.dart';
 
 import '../../../app/widgets/select_box.dart';
 import '../../../app/widgets/select_date.dart';
@@ -39,7 +38,6 @@ class _ReportCustomerState extends State<ReportCustomer> {
           icon: const Icon(
             Icons.arrow_back_ios,
             size: 24,
-            // color: primaryClr,
             color: Colors.white,
           ),
         ),
@@ -61,7 +59,6 @@ class _ReportCustomerState extends State<ReportCustomer> {
                   .allCustomer
                   .firstWhere((element) => element.nameCustomer == result)
                   .idCustomer!;
-              print(idCustomer);
             }),
             const SizedBox(height: 25),
             Row(
@@ -93,7 +90,6 @@ class _ReportCustomerState extends State<ReportCustomer> {
                   Expanded(
                     child: CustomButton(
                       text: 'view',
-                      // backgroundColor: Colors.white,
                       backgroundColor: const Color.fromARGB(255, 27, 65, 146),
                       textColor: Colors.white,
                       fontSize: 17,
@@ -107,7 +103,6 @@ class _ReportCustomerState extends State<ReportCustomer> {
                                 .readAllProceduresCustomer(
                                     idCustomer, fromDate, toDate);
                         setState(() {});
-                        print(result);
                         await generateAndPrintArabicPdf(
                             fromDate, toDate, result);
                       },
@@ -116,7 +111,6 @@ class _ReportCustomerState extends State<ReportCustomer> {
                   Expanded(
                     child: CustomButton(
                       text: 'Share',
-                      // backgroundColor: const Color(0xffEF8262),
                       backgroundColor: primaryClr,
                       textColor: Colors.white,
                       borderRadius: const BorderRadius.only(
@@ -124,21 +118,7 @@ class _ReportCustomerState extends State<ReportCustomer> {
                         bottomRight: Radius.circular(16),
                       ),
                       fontSize: 17,
-                      onPressed: () async {
-                        // final result = await Share.shareXFiles(
-                        //     [XFile('${Directory('')}/image1.jpg')]);
-                        await Share.share(
-                            'check out my website https://example.com');
-
-                        // if (result.status == ShareResultStatus.dismissed) {
-                        //   print('Did you not like the pictures?');
-                        // }
-                        // File pdfFile = File("assets/my_pdf.pdf");
-
-                        // Share the PDF file
-                        // Share.shareFiles([pdfFile]);
-                        // launchCustomUr(context, bookModel.volumeInfo.previewLink);
-                      },
+                      onPressed: () async {},
                     ),
                   ),
                 ],

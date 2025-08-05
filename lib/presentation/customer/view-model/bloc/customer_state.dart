@@ -1,9 +1,6 @@
 part of 'customer_bloc.dart';
 
-
-
 class CustomerState extends Equatable {
-  // final CustomerStatus status;
   final AppStatus status;
   final int idCustomer;
   final String? nameCustomer;
@@ -16,7 +13,6 @@ class CustomerState extends Equatable {
   final List<ModelCustomer> searchCustomer;
 
   const CustomerState({
-    // this.status = CustomerStatus.initial,
     this.status = AppStatus.initial,
     this.idCustomer = 0,
     this.nameCustomer,
@@ -29,7 +25,6 @@ class CustomerState extends Equatable {
     this.searchCustomer = const <ModelCustomer>[],
   });
   CustomerState copyWith({
-    // CustomerStatus? status,
     AppStatus? status,
     int? idCustomer,
     String? nameCustomer,
@@ -69,43 +64,3 @@ class CustomerState extends Equatable {
         searchCustomer,
       ];
 }
-
-// class CustomerInitial extends CustomerState {}
-
-// class LoadingState extends CustomerState {
-//   @override
-//   List<Object?> get props => [];
-// }
-
-// class LoadedState extends CustomerState {
-//   final List<ModelCustomer> allCustomerList;
-
-//   const LoadedState({this.allCustomerList = const <ModelCustomer>[]});
-
-//   @override
-//   List<Object> get props => [allCustomerList];
-// }
-
-// class SearchState extends CustomerState {
-//   final List<ModelCustomer> searchCustomerList;
-
-//   const SearchState({this.searchCustomerList = const <ModelCustomer>[]});
-
-//   @override
-//   List<Object> get props => [searchCustomerList];
-// }
-
-// class ErrorState extends CustomerState {
-//   final String? errorMessage;
-
-//   const ErrorState({this.errorMessage});
-//   @override
-//   List<Object?> get props => [errorMessage];
-// }
-
-// class SuccessState extends CustomerState {
-//   // final ModelCustomer modelCustomer;
-//   // SuccessState({required this.modelCustomer});
-//   @override
-//   List<Object?> get props => [];
-// }

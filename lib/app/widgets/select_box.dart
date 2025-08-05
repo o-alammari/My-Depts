@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:testing_2/alert_dialog_box.dart';
-import 'package:testing_2/presentation/customer/view-model/bloc/customer_bloc.dart';
+import 'package:my_debts/app/widgets/alert_dialog_box.dart';
+import 'package:my_debts/presentation/customer/view-model/bloc/customer_bloc.dart';
 
 class SelectBox extends StatefulWidget {
   final Function(String? result) onResult;
@@ -27,7 +27,6 @@ class _SelectBoxState extends State<SelectBox> {
 
         selectedValue = await showDialog(
           context: context,
-          // barrierDismissible: false,
           builder: (context) {
             return const DialogBox();
           },
@@ -39,7 +38,6 @@ class _SelectBoxState extends State<SelectBox> {
       },
       child: Padding(
         padding: const EdgeInsets.only(top: 10, left: 10),
-        // padding:
         child: Container(
           height: 45,
           decoration: BoxDecoration(
@@ -49,11 +47,9 @@ class _SelectBoxState extends State<SelectBox> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // SizedBox(width: 8),
               Padding(
                 padding: const EdgeInsets.only(left: 20),
                 child: Text(
-                  // selectedValue,
                   selectedValue ?? 'Select',
                   style: const TextStyle(
                     fontSize: 17,
@@ -68,9 +64,7 @@ class _SelectBoxState extends State<SelectBox> {
                   color: Color.fromARGB(255, 27, 65, 146),
                   size: 30,
                 ),
-                // child: Icon(Icons.keyboard_arrow_down_rounded, color: Colors.grey),
               ),
-              // const SizedBox(width: 8),
             ],
           ),
         ),

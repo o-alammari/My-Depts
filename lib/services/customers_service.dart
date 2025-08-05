@@ -1,4 +1,4 @@
-import 'package:testing_2/model/model_customer.dart';
+import 'package:my_debts/model/model_customer.dart';
 import '../db_helper/repository.dart';
 
 class CustomerService {
@@ -6,17 +6,15 @@ class CustomerService {
   CustomerService() {
     _repository = Repository();
   }
-  //Save User
+
   saveCustomer(ModelCustomer customer) async {
     return await _repository.insertData('customers', customer.toJson());
   }
 
-  //Read All Users
   readAllCustomers() async {
     return await _repository.readData('customers');
   }
 
-  //Edit User
   updateCustomer(ModelCustomer customer) async {
     return await _repository.updateData('customers', customer.toJson());
   }

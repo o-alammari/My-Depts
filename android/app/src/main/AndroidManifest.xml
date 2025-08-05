@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.testing_2">
-    <uses-permission android:name="android.permission.SEND_SMS" />
+    package="com.example.my_debts">
+    <!-- <uses-permission android:name="android.permission.SEND_SMS" /> -->
    <application
-        android:label="testing_2"
+        android:label="My-Depts"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

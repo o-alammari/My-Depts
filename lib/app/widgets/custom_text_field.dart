@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:testing_2/theme.dart';
+import 'package:my_debts/app/utils/theme.dart';
 
 class InputField2 extends StatelessWidget {
   InputField2({
@@ -42,93 +42,6 @@ class InputField2 extends StatelessWidget {
               ),
             ),
           ),
-          // TextFormField(
-          //   controller: controller,
-          //   autofocus: false,
-          //   readOnly: widget == null ? false : true,
-          //   style: subTitleStyle,
-          //   keyboardType: textInputType,
-          //   // cursorColor:
-          //   //     Get.isDarkMode ? Colors.grey[100] : Colors.grey[700],
-          //   cursorColor: Colors.grey[700],
-          //   decoration: InputDecoration(
-          //     hintText: hint,
-          //     hintStyle: subTitleStyle,
-          //     enabledBorder: const UnderlineInputBorder(
-          //       borderSide: BorderSide(
-          //         // color: context.theme.backgroundColor,
-          //         width: 0,
-          //       ),
-          //     ),
-          //     focusedBorder: const UnderlineInputBorder(
-          //       borderSide: BorderSide(
-          //         // color: context.theme.backgroundColor,
-          //         width: 0,
-          //       ),
-          //     ),
-          //   ),
-          // ),
-
-          // Container(
-          //   // width: SizeConfig.screenWidth,
-          //   width: MediaQuery.of(context).size.width,
-          //   height: 52,
-          //   padding: const EdgeInsets.only(left: 14),
-          //   margin: const EdgeInsets.only(top: 8),
-          //   decoration: BoxDecoration(
-          //     borderRadius: BorderRadius.circular(12),
-          //     border: Border.all(
-          //       color: Colors.grey,
-          //     ),
-          //   ),
-          //   child: Row(
-          //     children: [
-          //       Expanded(
-          //         // child: TextFormField(
-          //         //   keyboardType: textInputType ?? TextInputType.text,
-          //         //   decoration: InputDecoration(
-          //         //     hintText: hintText,
-          //         //     enabledBorder: OutlineInputBorder(
-          //         //       borderSide: const BorderSide(),
-          //         //       borderRadius: BorderRadius.circular(8),
-          //         //     ),
-          //         //     border: OutlineInputBorder(
-          //         //       borderSide: const BorderSide(),
-          //         //       borderRadius: BorderRadius.circular(8),
-          //         //     ),
-          //         //   ),
-          //         // ),
-          //         child: TextFormField(
-          //           controller: controller,
-          //           autofocus: false,
-          //           readOnly: widget == null ? false : true,
-          //           style: subTitleStyle,
-          //           keyboardType: textInputType,
-          //           // cursorColor:
-          //           //     Get.isDarkMode ? Colors.grey[100] : Colors.grey[700],
-          //           cursorColor: Colors.grey[700],
-          //           decoration: InputDecoration(
-          //             hintText: hint,
-          //             hintStyle: subTitleStyle,
-          //             enabledBorder: const UnderlineInputBorder(
-          //               borderSide: BorderSide(
-          //                 // color: context.theme.backgroundColor,
-          //                 width: 0,
-          //               ),
-          //             ),
-          //             focusedBorder: const UnderlineInputBorder(
-          //               borderSide: BorderSide(
-          //                 // color: context.theme.backgroundColor,
-          //                 width: 0,
-          //               ),
-          //             ),
-          //           ),
-          //         ),
-          //       ),
-          //       widget ?? Container(),
-          //     ],
-          //   ),
-          // ),
         ],
       ),
     );
@@ -162,10 +75,9 @@ class CustomTextField extends StatefulWidget {
 
 class _CustomTextFieldState extends State<CustomTextField> {
   bool isFocused = false;
-  // Color? backgroundColor ;
+
   Color? backgroundColor = Colors.grey[200];
-  // Color borderColor = Colors.black;
-  // Color cursorColor = Colors.black;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -175,7 +87,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
         children: [
           Text(widget.title, style: titleStyle),
           Container(
-            // width: SizeConfig.screenWidth,
             width: MediaQuery.of(context).size.width,
             height: 45,
             padding: const EdgeInsets.only(left: 10),
@@ -189,20 +100,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     keyboardType: widget.textInputType ?? TextInputType.text,
                     style: const TextStyle(
                       fontSize: 17,
-                      // color: Themes.fontColor,
                       color: Color.fromARGB(255, 242, 206, 24),
                     ),
-
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: backgroundColor,
-                      // fillColor: Color.fromARGB(147, 153, 195, 234),
                       hintText: widget.hint,
-                      // focusColor: Color.fromARGB(255, 187, 167, 39),
                       hintStyle: const TextStyle(
                         color: Color.fromARGB(255, 145, 166, 210),
                       ),
-                      // icon: Icon(Icons.verified_user),
                       errorText: widget.errorText1,
                       focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
@@ -212,14 +118,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
-                          // color: Color.fromARGB(255, 88, 127, 210),
                           color: Color.fromARGB(255, 145, 166, 210),
                         ),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       border: OutlineInputBorder(
                         borderSide: const BorderSide(
-                          // color: Color.fromARGB(255, 159, 159, 29),
                           color: primaryClr,
                         ),
                         borderRadius: BorderRadius.circular(8),
@@ -232,89 +136,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
                         backgroundColor = Colors.white;
                       });
                     },
-                    // onChanged: (value) => widget.onChange!(value),
                     onChanged: widget.onChange,
-
-                    // onSaved: (value) {
-                    //   setState(() {
-                    //     // backgroundColor = Colors.black;
-                    //     // backgroundColor = null;
-                    //   });
-                    // },
-                    // onFieldSubmitted: (value) {
-                    //   setState(() {
-                    //     backgroundColor = Colors.black;
-                    //     // backgroundColor = null;
-                    //     // backgroundColor = Colors.grey[200];
-                    //   });
-                    // },
                   ),
-
-                  // child: TextFormField(
-                  //   controller: widget.controller,
-                  //   obscureText: widget.obscureText ?? false,
-                  //   keyboardType: widget.textInputType ?? TextInputType.text,
-                  //   style: const TextStyle(
-                  //       color: Color.fromARGB(255, 27, 65, 146)),
-                  //   decoration: InputDecoration(
-                  //     // filled: true,
-                  //     // fillColor: Color.fromARGB(147, 153, 195, 234),
-                  //     hintText: widget.hint,
-                  //     // focusColor: Color.fromARGB(255, 187, 167, 39),
-                  //     hintStyle: const TextStyle(
-                  //       // color: Color.fromARGB(255, 152, 175, 224)),
-                  //       color: Color.fromARGB(255, 145, 166, 210),
-                  //     ),
-                  //     // icon: Icon(Icons.verified_user),
-                  //     enabledBorder: OutlineInputBorder(
-                  //       borderSide: const BorderSide(
-                  //           // color: Color.fromARGB(255, 88, 127, 210),
-                  //           // color: Color.fromARGB(255, 145, 166, 210),
-                  //           ),
-                  //       borderRadius: BorderRadius.circular(8),
-                  //     ),
-                  //     border: OutlineInputBorder(
-                  //       borderSide: const BorderSide(
-                  //           // color: Color.fromARGB(255, 159, 159, 29),
-                  //           ),
-                  //       borderRadius: BorderRadius.circular(8),
-                  //     ),
-                  //   ),
-                  //   onChanged: widget.onChange,
-                  // ),
-
-                  // child: TextFormField(
-                  //   controller: controller,
-                  //   obscureText: obscureText ?? false,
-                  //   keyboardType: textInputType ?? TextInputType.text,
-                  //   style: const TextStyle(
-                  //       color: Color.fromARGB(255, 27, 65, 146)),
-                  //   decoration: InputDecoration(
-                  //     // filled: true,
-                  //     // fillColor: Color.fromARGB(147, 153, 195, 234),
-                  //     hintText: hint,
-                  //     // focusColor: Color.fromARGB(255, 187, 167, 39),
-                  //     hintStyle: const TextStyle(
-                  //       // color: Color.fromARGB(255, 152, 175, 224)),
-                  //       color: Color.fromARGB(255, 145, 166, 210),
-                  //     ),
-                  //     // icon: Icon(Icons.verified_user),
-                  //     enabledBorder: OutlineInputBorder(
-                  //       borderSide: const BorderSide(
-                  //         // color: Color.fromARGB(255, 88, 127, 210),
-                  //         // color: Color.fromARGB(255, 145, 166, 210),
-                  //       ),
-                  //       borderRadius: BorderRadius.circular(8),
-                  //     ),
-                  //     border: OutlineInputBorder(
-                  //       borderSide: const BorderSide(
-                  //           // color: Color.fromARGB(255, 159, 159, 29),
-                  //           ),
-                  //       borderRadius: BorderRadius.circular(8),
-                  //     ),
-                  //   ),
-                  //   onChanged: onChange,
-                  // ),
                 ),
                 widget.widget ?? Container(),
               ],

@@ -1,25 +1,21 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testing_2/presentation/procedure/view-model/bloc_procedure/procedure_bloc.dart';
 
-import 'package:testing_2/presentation/procedure/view/widgets/all_procedures_items.dart';
-import 'package:testing_2/constant.dart';
-import 'package:testing_2/theme.dart';
-import 'package:testing_2/app/function/bottom_sheet.dart';
+import 'package:my_debts/app/function/bottom_sheet.dart';
+import 'package:my_debts/app/utils/constant.dart';
+import 'package:my_debts/app/utils/theme.dart';
+import 'package:my_debts/presentation/procedure/view-model/bloc_procedure/procedure_bloc.dart';
+import 'package:my_debts/presentation/procedure/view/widgets/all_procedures_items.dart';
 
 class AllProcedures extends StatelessWidget {
   const AllProcedures({
     Key? key,
   }) : super(key: key);
-  // FocusNode? input1FocusNode;
 
-  // WidgetsBinding.instance.addPostFrameCallback((_) async {
   @override
   Widget build(BuildContext context) {
     final idCustomer = ModalRoute.of(context)!.settings.arguments as int;
     return Scaffold(
-      // backgroundColor: Themes.backgroundColor,
       backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: <Widget>[
@@ -74,7 +70,6 @@ class AllProcedures extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: Colors.grey[300],
-                  // color: Colors.grey[300],
                 ),
                 child: Row(
                   children: [
@@ -115,11 +110,8 @@ class AllProcedures extends StatelessWidget {
                     child: ListView.builder(
                       padding: EdgeInsets.zero,
                       physics: const NeverScrollableScrollPhysics(),
-                      // elevation: 5,
-                      // itemCount: proceduresList.length,
                       itemCount: state.allProcedure.length,
                       itemBuilder: (context, index) {
-                        // ModelProcedures modelProcedure = proceduresList![index];
                         return AllProceduresItems(
                           modelProcedure: state.allProcedure[index],
                         );
@@ -127,12 +119,10 @@ class AllProcedures extends StatelessWidget {
                     ),
                   );
                 } else if (state.status.isError) {
-                  return Container(
-                    child: const Center(
-                      child: Text(
-                        'Not Procedures',
-                        style: TextStyle(color: Colors.black),
-                      ),
+                  return const Center(
+                    child: Text(
+                      'Not Procedures',
+                      style: TextStyle(color: Colors.black),
                     ),
                   );
                 } else {
@@ -142,7 +132,6 @@ class AllProcedures extends StatelessWidget {
                       style: TextStyle(color: Colors.black),
                     ),
                   );
-                  // return Container();
                 }
               },
             ),

@@ -2,9 +2,9 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
-import 'package:testing_2/app/function/valid.dart';
-import 'package:testing_2/model/model_procedures.dart';
-import 'package:testing_2/services/procedures_service.dart';
+import 'package:my_debts/app/function/valid.dart';
+import 'package:my_debts/model/model_procedures.dart';
+import 'package:my_debts/services/procedures_service.dart';
 
 part 'procedure_event.dart';
 part 'procedure_state.dart';
@@ -50,10 +50,8 @@ class ProcedureBloc extends Bloc<ProcedureEvents, ProcedureState> {
     final isValidNameProcedure = isValid(state.nameProcedure);
     final isValidAmountProcedure = isValid(state.amountProcedure);
     if (isValidNameProcedure && isValidAmountProcedure) {
-      print(
-          'True Check value success => ${state.nameProcedure} ${state.amountProcedure} ');
-      var re = await procedureService.saveProcedures(event.addProcedure!);
-      print('${re}');
+      await procedureService.saveProcedures(event.addProcedure!);
+
       emit(
         state.copyWith(
             addProcedure: event.addProcedure, status: ProcedureStatus.success),
@@ -147,6 +145,5 @@ class ProcedureBloc extends Bloc<ProcedureEvents, ProcedureState> {
   @override
   void onTransition(Transition<ProcedureEvents, ProcedureState> transition) {
     super.onTransition(transition);
-    print(transition);
   }
 }

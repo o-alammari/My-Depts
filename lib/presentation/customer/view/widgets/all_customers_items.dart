@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testing_2/constant.dart';
-import 'package:testing_2/model/model_customer.dart';
-import 'package:testing_2/presentation/customer/view-model/bloc/customer_bloc.dart';
-import 'package:testing_2/presentation/procedure/view-model/bloc_procedure/procedure_bloc.dart';
-import 'package:testing_2/services/customers_service.dart';
-import 'package:testing_2/theme.dart';
+import 'package:my_debts/app/utils/constant.dart';
+import 'package:my_debts/model/model_customer.dart';
+import 'package:my_debts/presentation/customer/view-model/bloc/customer_bloc.dart';
+import 'package:my_debts/presentation/procedure/view-model/bloc_procedure/procedure_bloc.dart';
+import 'package:my_debts/services/customers_service.dart';
+import 'package:my_debts/app/utils/theme.dart';
 
 class AllCustomersItems extends StatelessWidget {
   ModelCustomer? modelCustomer;
@@ -58,7 +58,6 @@ class AllCustomersItems extends StatelessWidget {
               topRight: Radius.circular(15),
             ),
             color: Colors.grey[300],
-            // color: Colors.white,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,7 +71,6 @@ class AllCustomersItems extends StatelessWidget {
                   ),
                   trailing: CircleAvatar(
                     backgroundColor: const Color.fromARGB(255, 215, 208, 208),
-                    // backgroundColor: Colors.grey,
                     child: IconButton(
                         onPressed: () => Navigator.of(context).pop(),
                         icon: const Icon(
@@ -86,13 +84,11 @@ class AllCustomersItems extends StatelessWidget {
                 margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
-                  // color: Colors.grey[300],
                   color: Colors.white,
                 ),
                 child: Column(
                   children: [
                     ListTile(
-                      // leading: Icon(Icons.photo),
                       title: const Text('All Procedures'),
                       trailing: const Icon(
                         Icons.info_outline,
@@ -112,16 +108,13 @@ class AllCustomersItems extends StatelessWidget {
               ),
               Container(
                 margin: const EdgeInsets.only(left: 20, right: 20, top: 15),
-                // margin: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
-                  // color: Colors.grey[300],
                   color: Colors.white,
                 ),
                 child: Column(
                   children: [
                     ListTile(
-                      // leading: Icon(Icons.photo),
                       title: const Text('Edit Customer'),
                       trailing: const Icon(
                         Icons.edit_sharp,
@@ -135,7 +128,6 @@ class AllCustomersItems extends StatelessWidget {
                     ),
                     const Divider(),
                     ListTile(
-                      // leading: Icon(Icons.photo),
                       title: const Text(
                         'Delete Customer',
                         style: TextStyle(color: Colors.red),
@@ -145,7 +137,6 @@ class AllCustomersItems extends StatelessWidget {
                         color: Colors.red,
                       ),
                       onTap: () {
-                        // final customerBloc = BlocProvider.of<CustomerBloc>(context);
                         Navigator.of(context).pop();
                         showBottomSheetDelete(context);
                       },
@@ -165,9 +156,7 @@ class AllCustomersItems extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
-      // useSafeArea: true,
       backgroundColor: Themes.backgroundColor,
-      // isScrollControlled: true,
       context: context,
       builder: (BuildContext context) {
         return Container(
@@ -178,10 +167,8 @@ class AllCustomersItems extends StatelessWidget {
               topRight: Radius.circular(15),
             ),
             color: Colors.grey[300],
-            // color: Colors.white,
           ),
           child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 margin: const EdgeInsets.only(left: 5, right: 5, top: 10),
@@ -189,7 +176,6 @@ class AllCustomersItems extends StatelessWidget {
                   title: Text('Delete Name...?', style: titleBottomSheetStyle),
                   trailing: CircleAvatar(
                     backgroundColor: const Color.fromARGB(255, 215, 208, 208),
-                    // backgroundColor: Colors.grey,
                     child: IconButton(
                         onPressed: () => Navigator.of(context).pop(),
                         icon: const Icon(
@@ -201,23 +187,18 @@ class AllCustomersItems extends StatelessWidget {
               ),
               Container(
                 margin: const EdgeInsets.only(right: 20, left: 20, top: 10),
-
-                // margin: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
-                  // color: Colors.grey[300],
                   color: Colors.white,
                 ),
                 child: Column(
                   children: [
                     ListTile(
-                      // leading: Icon(Icons.photo),
                       title: const Text(
                         'Delete Customer',
                         style: TextStyle(color: Colors.red),
                       ),
                       trailing: const Icon(Icons.delete, color: Colors.red),
-
                       onTap: () {
                         context.read<CustomerBloc>().add(DeleteCustomerEvent(
                             idCustomer: modelCustomer!.idCustomer!));

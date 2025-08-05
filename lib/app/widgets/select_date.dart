@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/src/intl/date_format.dart';
 
-import 'package:testing_2/theme.dart';
+import 'package:my_debts/app/utils/theme.dart';
 
 class SelectDate extends StatefulWidget {
   final String title;
@@ -40,7 +40,6 @@ class _SelectDateState extends State<SelectDate> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // SizedBox(width: 8),
                   Padding(
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
@@ -60,9 +59,7 @@ class _SelectDateState extends State<SelectDate> {
                       color: Color.fromARGB(255, 27, 65, 146),
                       size: 30,
                     ),
-                    // child: Icon(Icons.keyboard_arrow_down_rounded, color: Colors.grey),
                   ),
-                  // const SizedBox(width: 8),
                 ],
               ),
             ),
@@ -82,8 +79,6 @@ class _SelectDateState extends State<SelectDate> {
     if (pickedDate != null) {
       widget.onResult(pickedDate.toString());
       setState(() => _selectedDate = pickedDate);
-    } else {
-      // print('It\'s null or something is wrong');
     }
   }
 }

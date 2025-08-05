@@ -1,8 +1,5 @@
 part of 'procedure_bloc.dart';
 
-// @immutable
-// abstract class ProcedureState {}
-
 enum ProcedureStatus { initial, success, error, loading, loaded }
 
 extension ProcedureStatusX on ProcedureStatus {
@@ -85,51 +82,3 @@ class ProcedureState extends Equatable {
         searchProcedure,
       ];
 }
-
-// class ProcedureInitial extends ProcedureState {}
-
-// class LoadingState extends ProcedureState {
-//   @override
-//   List<Object?> get props => [];
-// }
-
-// class LoadedState extends ProcedureState {
-//   final List<ModelProcedures> allProcedureList;
-
-//   const LoadedState({this.allProcedureList = const <ModelProcedures>[]});
-
-//   @override
-//   List<Object> get props => [allProcedureList];
-// }
-
-// class SearchState extends ProcedureState {
-//   final List<ModelProcedures> searchProcedureList;
-
-//   const SearchState({this.searchProcedureList = const <ModelProcedures>[]});
-
-//   @override
-//   List<Object> get props => [searchProcedureList];
-// }
-
-// class ErrorState extends ProcedureState {
-//   final String? errorMessage;
-
-//   const ErrorState({this.errorMessage});
-//   @override
-//   List<Object?> get props => [errorMessage];
-// }
-
-// class SuccessState extends ProcedureState {
-//   @override
-//   List<Object?> get props => [];
-// }
-
-// class LoadingState extends ProcedureState {}
-// class ErrorState extends ProcedureState {
-//   final String errorMessage;
-//   ErrorState({required this.errorMessage});
-// }
-// class SuccessState extends ProcedureState {
-//   final ModelProcedures user;
-//   const SuccessState({required this.user});
-// }

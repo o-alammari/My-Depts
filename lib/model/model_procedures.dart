@@ -36,14 +36,3 @@ class ModelProcedures {
     };
   }
 }
-
-  // ModelProcedures fromJson(json) {
-  //   return ModelProcedures(
-  //     idProcedures: json['id'],
-  //     nameProcedures: json['nameProcedures'],
-  //     idCustomer: json['idCustomer'],
-  //     dateProcedures: json['dateProcedures'],
-  //     credit: json['credit'],
-  //     debit: json['debit'],
-  //   );
-  // }

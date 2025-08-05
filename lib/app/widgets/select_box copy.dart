@@ -1,8 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
-import 'package:testing_2/alert_dialog_box.dart';
-import 'package:testing_2/model/model_customer.dart';
+import 'package:my_debts/app/widgets/alert_dialog_box.dart';
+import 'package:my_debts/model/model_customer.dart';
 
 class SelectBox extends StatefulWidget {
   final Function(String? result) onResult;

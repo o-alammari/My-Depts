@@ -1,31 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testing_2/app/function/app_status.dart';
-import 'package:testing_2/app/function/custom_snack_bar.dart';
-import 'package:testing_2/presentation/customer/view-model/bloc/customer_bloc.dart';
-import '../../../theme.dart';
+import 'package:my_debts/app/function/app_status.dart';
+import 'package:my_debts/app/function/custom_snack_bar.dart';
+import 'package:my_debts/presentation/customer/view-model/bloc/customer_bloc.dart';
+import '../../../app/utils/theme.dart';
 import 'widgets/all_customers_items.dart';
 
 class SearchScreenCustomers extends StatelessWidget {
   const SearchScreenCustomers({super.key});
 
-  // final searchFieldKey = GlobalKey<FormFieldState>();
-
   @override
   Widget build(BuildContext context) {
-    // final customerBloc = BlocProvider.of<CustomerBloc>(context);
-    
     return BlocConsumer<CustomerBloc, CustomerState>(
       listener: (context, state) {
-        // if (state is SearchState) {
-        if (state.status.isLoaded) {
-          // searchResults = state.searchCustomer;
-          // searchResults = state.searchCustomerList;
-          // setState(() {});
-          // } else if (state is ErrorState) {
-        } else if (state.status.isError) {
-          // setState(() {});
-          // searchResults = state.;
+        if (state.status.isError) {
           customSnackBar(context, 'Type Error => isError Not Customers');
         }
       },
@@ -37,9 +25,9 @@ class SearchScreenCustomers extends StatelessWidget {
               actions: [
                 Container(
                   margin: const EdgeInsets.only(
-                      top: 11, left: 0, right: 5, bottom: 6),
-                  // height: 30,
-                  width: 290,
+                      top: 11, left: 10, right: 0, bottom: 6),
+                  height: 40,
+                  width: 280,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     color: const Color.fromARGB(255, 215, 208, 208),
@@ -73,7 +61,7 @@ class SearchScreenCustomers extends StatelessWidget {
                   },
                   child: const Text(
                     'Cancel',
-                    style: TextStyle(fontSize: 18, color: primaryClr),
+                    style: TextStyle(fontSize: 12, color: primaryClr),
                   ),
                 ),
               ],
@@ -91,7 +79,6 @@ class SearchScreenCustomers extends StatelessWidget {
                           .read<CustomerBloc>()
                           .state
                           .searchCustomer[index],
-                      // modelCustomer: customerBloc.state.allCustomerList,
                     ),
                   );
                 },

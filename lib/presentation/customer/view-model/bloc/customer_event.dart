@@ -26,6 +26,7 @@ class AddCustomerEvent extends CustomerEvents {
   @override
   List<Object?> get props => [addCustomer];
 }
+
 class UpdateCustomerEvent extends CustomerEvents {
   final ModelCustomer? updateCustomer;
 
@@ -51,14 +52,6 @@ class AllCustomersEvent extends CustomerEvents {
   const AllCustomersEvent();
   @override
   List<Object?> get props => [];
-
-  // final List<ModelCustomer>? allCustomer;
-
-  // const AllCustomersEvent({
-  //   this.allCustomer,
-  // });
-  // @override
-  // List<Object?> get props => [allCustomer];
 }
 
 class CustomerNameChangedEvent extends CustomerEvents {

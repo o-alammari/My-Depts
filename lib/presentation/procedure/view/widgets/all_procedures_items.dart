@@ -1,21 +1,26 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testing_2/constant.dart';
-import 'package:testing_2/model/model_procedures.dart';
-import 'package:testing_2/presentation/procedure/view-model/bloc_procedure/procedure_bloc.dart';
-import 'package:testing_2/theme.dart';
+
+import 'package:my_debts/app/utils/constant.dart';
+import 'package:my_debts/app/utils/theme.dart';
+import 'package:my_debts/model/model_procedures.dart';
+import 'package:my_debts/presentation/procedure/view-model/bloc_procedure/procedure_bloc.dart';
 
 class AllProceduresItems extends StatelessWidget {
   ModelProcedures modelProcedure;
 
-  AllProceduresItems({required this.modelProcedure, super.key});
+  AllProceduresItems({
+    Key? key,
+    required this.modelProcedure,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         ListTile(
           tileColor: Colors.white,
-          // leading: Text(widget.modelProcedure.amountProcedures),
           title: Text(
             modelProcedure.nameProcedures,
             style: const TextStyle(
@@ -28,21 +33,20 @@ class AllProceduresItems extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                '${modelProcedure.credit != '0' ? modelProcedure.credit : modelProcedure.debit}.00',
+                '${modelProcedure.credit != 0 ? modelProcedure.credit : modelProcedure.debit}.00',
                 style: const TextStyle(
                   fontSize: 15,
-                  // color: Color.fromARGB(255, 27, 65, 146),
                   color: Color.fromARGB(255, 40, 82, 174),
                 ),
               ),
               const SizedBox(width: 5),
               Icon(
-                modelProcedure.credit != '0'
+                modelProcedure.credit != 0
                     ? Icons.arrow_downward_sharp
                     : Icons.arrow_upward_sharp,
                 size: 25,
                 opticalSize: 1,
-                color: Themes.fontColor,
+                color: Themes.light.primaryColor,
               ),
             ],
           ),
@@ -52,7 +56,6 @@ class AllProceduresItems extends StatelessWidget {
           height: 0,
           thickness: 1.5,
           indent: 10,
-          // indent: MediaQuery.of(context).size.width * .15,
           endIndent: 15,
         ),
       ],
@@ -65,7 +68,6 @@ class AllProceduresItems extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
-      // isScrollControlled: true,
       context: context,
       builder: (BuildContext context) {
         return Container(
@@ -76,7 +78,6 @@ class AllProceduresItems extends StatelessWidget {
               topRight: Radius.circular(15),
             ),
             color: Colors.grey[300],
-            // color: Colors.white,
           ),
           child: Column(
             children: [
@@ -88,10 +89,7 @@ class AllProceduresItems extends StatelessWidget {
                     style: titleBottomSheetStyle,
                   ),
                   trailing: CircleAvatar(
-                    // foregroundColor: const Color.fromARGB(255, 215, 208, 208),
-                    // maxRadius: 6,
                     backgroundColor: const Color.fromARGB(255, 215, 208, 208),
-                    // backgroundColor: Colors.grey,
                     child: IconButton(
                       onPressed: () => Navigator.of(context).pop(),
                       icon: const Icon(
@@ -106,13 +104,11 @@ class AllProceduresItems extends StatelessWidget {
                 margin: const EdgeInsets.only(right: 20, left: 20, top: 10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
-                  // color: Colors.grey[300],
                   color: Colors.white,
                 ),
                 child: Column(
                   children: [
                     ListTile(
-                      // leading: Icon(Icons.photo),
                       title: const Text('Edit Procedure'),
                       trailing: const Icon(
                         Icons.edit_sharp,
@@ -126,7 +122,6 @@ class AllProceduresItems extends StatelessWidget {
                     ),
                     const Divider(),
                     ListTile(
-                      // leading: Icon(Icons.photo),
                       title: const Text(
                         'Delete Procedure',
                         style: TextStyle(color: Colors.red),
@@ -155,9 +150,7 @@ class AllProceduresItems extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
-      // useSafeArea: true,
       backgroundColor: Colors.grey[300],
-      // isScrollControlled: true,
       context: context,
       builder: (BuildContext context) {
         return Container(
@@ -178,7 +171,6 @@ class AllProceduresItems extends StatelessWidget {
                       style: titleBottomSheetStyle),
                   trailing: CircleAvatar(
                     backgroundColor: const Color.fromARGB(255, 215, 208, 208),
-                    // backgroundColor: Colors.grey,
                     child: IconButton(
                         onPressed: () {
                           Navigator.of(context).pop();
@@ -192,16 +184,13 @@ class AllProceduresItems extends StatelessWidget {
               ),
               Container(
                 margin: const EdgeInsets.only(right: 20, left: 20, top: 10),
-                // margin: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
-                  // color: Colors.grey[300],
                   color: Colors.white,
                 ),
                 child: Column(
                   children: [
                     ListTile(
-                      // leading: Icon(Icons.photo),
                       title: const Text(
                         'Delete Procedure',
                         style: TextStyle(color: Colors.red),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:testing_2/theme.dart';
+import 'package:my_debts/app/utils/theme.dart';
 
 class CustomTextFieldWithoutTitle extends StatefulWidget {
   const CustomTextFieldWithoutTitle({
@@ -43,7 +43,7 @@ class _CustomTextFieldWithoutTitleState
   Widget build(BuildContext context) {
     Color borderColor =
         isFocused ? primaryClr : const Color.fromARGB(255, 145, 166, 210);
-    // Color backgroundColor = isFocused ? Colors.white : Colors.grey[200]!;
+
     Color backgroundColor = isFocused ? Colors.white : Colors.white;
 
     return Focus(
@@ -66,13 +66,6 @@ class _CustomTextFieldWithoutTitleState
         ),
         child: Row(
           children: [
-            // if (widget.prefix != null)
-            //   const Padding(
-            //     padding: EdgeInsets.symmetric(horizontal: 8.0),
-            //     child: Icon(Icons.search),
-            //   )
-            // else
-            //   const SizedBox(width: 10),
             Expanded(
               child: TextField(
                 controller: widget.controller,
@@ -86,7 +79,6 @@ class _CustomTextFieldWithoutTitleState
                   border: InputBorder.none,
                   hintText: widget.hint,
                   hintStyle: const TextStyle(
-                    // color: Color.fromARGB(255, 152, 175, 224)),
                     color: Color.fromARGB(255, 145, 166, 210),
                   ),
                   prefixIcon: Icon(widget.prefixIcon, color: Themes.fontColor),
@@ -109,70 +101,9 @@ class _CustomTextFieldWithoutTitleState
                 onChanged: widget.onChange,
               ),
             ),
-
-            // Padding(
-            //   padding: EdgeInsets.symmetric(horizontal: 8.0),
-            //   child: Icon(Icons.clear),
-            // ),
           ],
         ),
       ),
     );
   }
-  // @override
-  // Widget build(BuildContext context) {
-  //   Color borderColor =
-  //       isPressed ? Color.fromARGB(255, 145, 166, 210) : primaryClr;
-  //   Color backgroundColor =
-  //       isPressed ? Colors.green.withOpacity(0.2) : Colors.transparent;
-
-  //   return GestureDetector(
-  //     onTapDown: (details) {
-  //       setState(() {
-  //         isPressed = true;
-  //       });
-  //     },
-  //     onTapUp: (details) {
-  //       setState(() {
-  //         isPressed = false;
-  //       });
-  //     },
-  //     onTapCancel: () {
-  //       setState(() {
-  //         isPressed = false;
-  //       });
-  //     },
-  //     child: Container(
-  //       decoration: BoxDecoration(
-  //         border: Border.all(
-  //           color: borderColor,
-  //           width: 1.0,
-  //         ),
-  //         borderRadius: BorderRadius.circular(8.0),
-  //         color: backgroundColor,
-  //       ),
-  //       child: Row(
-  //         children: [
-  //           Padding(
-  //             padding: EdgeInsets.symmetric(horizontal: 8.0),
-  //             child: Icon(Icons.search),
-  //           ),
-  //           Expanded(
-  //             child: TextField(
-  //               onTapOutside: (event) {},
-  //               decoration: InputDecoration(
-  //                 border: InputBorder.none,
-  //                 hintText: 'ابحث هنا...',
-  //               ),
-  //             ),
-  //           ),
-  //           Padding(
-  //             padding: EdgeInsets.symmetric(horizontal: 8.0),
-  //             child: Icon(Icons.clear),
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
 }

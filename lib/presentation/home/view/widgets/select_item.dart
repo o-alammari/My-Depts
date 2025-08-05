@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:testing_2/theme.dart';
+import 'package:my_debts/app/utils/theme.dart';
 
 class SelectItem extends StatelessWidget {
   final String name;
@@ -34,7 +34,7 @@ class SelectItem extends StatelessWidget {
               name,
               style: const TextStyle(
                 color: Themes.fontColor,
-                fontSize: 20,
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),

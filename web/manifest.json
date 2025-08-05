@@ -1,6 +1,6 @@
 {
-    "name": "testing_2",
-    "short_name": "testing_2",
+    "name": "my_debts",
+    "short_name": "my_debts",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testing_2/constant.dart';
-import 'package:testing_2/app/function/app_status.dart';
-import 'package:testing_2/presentation/customer/view-model/bloc/customer_bloc.dart';
-import 'package:testing_2/theme.dart';
+import 'package:my_debts/app/utils/constant.dart';
+import 'package:my_debts/app/function/app_status.dart';
+import 'package:my_debts/presentation/customer/view-model/bloc/customer_bloc.dart';
+import 'package:my_debts/app/utils/theme.dart';
 import 'widgets/all_customers_items.dart';
 
 class AllCustomers extends StatelessWidget {
   const AllCustomers({super.key});
 
-  // FocusNode? input1FocusNode;
   @override
   Widget build(BuildContext context) {
-    // BlocProvider.of<CustomerBloc>(context).add( AllCustomersEvent());
     return Scaffold(
       backgroundColor: Colors.white,
-      // backgroundColor: Themes.backgroundColor,
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: <Widget>[
@@ -26,7 +23,6 @@ class AllCustomers extends StatelessWidget {
               icon: const Icon(
                 Icons.arrow_back_ios,
                 size: 24,
-                // color: primaryClr,
                 color: Colors.white,
               ),
             ),
@@ -38,11 +34,10 @@ class AllCustomers extends StatelessWidget {
             ],
             centerTitle: true,
             backgroundColor: primaryClr,
-            expandedHeight: 120, // ارتفاع العنوان عندما يتم توسيعه
-            pinned: true, //يتم تثبيت العنوان في الجزء العلوي عند التمرير للأسفل
+            expandedHeight: 120,
+            pinned: true,
             flexibleSpace: FlexibleSpaceBar(
-              titlePadding: const EdgeInsets.only(
-                  left: 25, bottom: 16), // تعديل الهوامش الداخلية لعنوان الصفحة
+              titlePadding: const EdgeInsets.only(left: 25, bottom: 16),
               title: Text(
                 'Customer',
                 style: titleAppBarStyle,
@@ -58,7 +53,6 @@ class AllCustomers extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: Colors.grey[300],
-                  // color: Colors.white,
                 ),
                 child: Row(
                   children: [
@@ -85,42 +79,29 @@ class AllCustomers extends StatelessWidget {
             ),
           ),
           SliverFillRemaining(
-            // hasScrollBody: false,
-            // shape: RoundedRectangleBorder(
-            //   borderRadius: BorderRadius.circular(15.0),
-            // ),
             child: BlocBuilder<CustomerBloc, CustomerState>(
               builder: (context, state) {
-                // if (state is LoadingState) {
                 if (state.status.isLoading) {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
-                  // } else if (state is LoadedState) {
                 } else if (state.status.isLoaded) {
-                  // print(state.allCustomer[0]);
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: ListView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      // padding: const EdgeInsets.only(top: 10),
                       padding: EdgeInsets.zero,
-                      // itemCount: state.allCustomerList.length,
                       itemCount: state.allCustomer.length,
                       itemBuilder: (context, index) {
-                        // var model = modelList[index];
                         return AllCustomersItems(
                           modelCustomer: state.allCustomer[index],
                         );
                       },
                     ),
                   );
-                  // } else if (state is ErrorState) {
                 } else if (state.status.isError) {
                   return const Center();
-                  // customSnackBar(context, 'Type Error ${state.errorMessage}');
-                  // customSnackBar(context, 'Type Error => Failure all Customers ');
                 } else {
                   return Container();
                 }

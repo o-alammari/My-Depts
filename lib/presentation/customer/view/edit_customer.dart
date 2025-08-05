@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testing_2/constant.dart';
-import 'package:testing_2/app/function/app_status.dart';
-import 'package:testing_2/app/function/custom_snack_bar.dart';
-import 'package:testing_2/model/model_customer.dart';
-import 'package:testing_2/presentation/customer/view-model/bloc/customer_bloc.dart';
-import 'package:testing_2/services/customers_service.dart';
-import 'package:testing_2/theme.dart';
+import 'package:my_debts/app/utils/constant.dart';
+import 'package:my_debts/app/function/app_status.dart';
+import 'package:my_debts/app/function/custom_snack_bar.dart';
+import 'package:my_debts/model/model_customer.dart';
+import 'package:my_debts/presentation/customer/view-model/bloc/customer_bloc.dart';
+import 'package:my_debts/app/utils/theme.dart';
 
 import '../../../app/widgets/custom_button.dart';
 import '../../../app/widgets/custom_text_field.dart';
 
 class EditCustomer extends StatefulWidget {
-  // final TextEditingController input1;
-  // final TextEditingController input2;
-  // const EditCustomer({required this.input1, required this.input2, super.key});
   const EditCustomer({super.key});
 
   @override
@@ -28,16 +24,6 @@ class _EditCustomerState extends State<EditCustomer> {
   TextEditingController input3 = TextEditingController();
 
   late ModelCustomer model;
-
-  // Future<int> editCustomer() async {
-  //   ModelCustomer modelCustomer = ModelCustomer(
-  //     idCustomer: model.idCustomer,
-  //     nameCustomer: input1.text,
-  //     phoneCustomer: input2.text,
-  //     creditCustomer: input3.text,
-  //   );
-  //   return (await CustomerService().updateCustomer(modelCustomer)) as int;
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -118,15 +104,6 @@ class _EditCustomerState extends State<EditCustomer> {
                               creditCustomer: input3.text,
                             ),
                           ),
-                          // onPressed: () => customerBloc.add(
-                          //   UpdateCustomerEvent(
-                          //     updateCustomer: ModelCustomer(
-                          //       idCustomer: model.idCustomer,
-                          //       nameCustomer: input1.text,
-                          //       phoneCustomer: input2.text,
-                          //       creditCustomer: input3.text,
-                          //     ),
-                          //   ),
                         ),
                   ),
                 ),

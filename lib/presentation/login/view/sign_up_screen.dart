@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testing_2/app/function/app_status.dart';
-import 'package:testing_2/constant.dart';
-import 'package:testing_2/app/function/custom_snack_bar.dart';
-import 'package:testing_2/model/model_user.dart';
-import 'package:testing_2/presentation/login/view-model/bloc-sign/sign_bloc.dart';
-import 'package:testing_2/theme.dart';
-import 'package:testing_2/app/widgets/custom_button.dart';
-import 'package:testing_2/app/widgets/custom_text_field_without_title.dart';
+import 'package:my_debts/app/function/app_status.dart';
+import 'package:my_debts/app/utils/constant.dart';
+import 'package:my_debts/app/function/custom_snack_bar.dart';
+import 'package:my_debts/model/model_user.dart';
+import 'package:my_debts/presentation/login/view-model/bloc-sign/sign_bloc.dart';
+import 'package:my_debts/app/utils/theme.dart';
+import 'package:my_debts/app/widgets/custom_button.dart';
+import 'package:my_debts/app/widgets/custom_text_field_without_title.dart';
 
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
@@ -32,9 +32,7 @@ class SignUpScreen extends StatelessWidget {
         }
       },
       builder: (context, state) => Scaffold(
-        // backgroundColor: Themes.backgroundColor,
         backgroundColor: primaryClr,
-        // backgroundColor: const Color.fromARGB(255, 247, 235, 235),
         body: SafeArea(
           child: CustomScrollView(
             slivers: [
@@ -71,7 +69,6 @@ class SignUpScreen extends StatelessWidget {
                           ),
                         ),
                         child: Form(
-                          // key: _formKey,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -85,12 +82,7 @@ class SignUpScreen extends StatelessWidget {
                               const SizedBox(height: 20),
                               CustomTextFieldWithoutTitle(
                                 hint: 'Full name',
-                                // controller: input1,
                                 onChange: (p0) {},
-                                // onChange: (value) => context
-                                //     .read<SignBloc>()
-                                //     .add(UserNameChangedEvent(userName: value)),
-                                // prefixIcon: Icons.person,
                               ),
                               const SizedBox(height: 10),
                               CustomTextFieldWithoutTitle(
@@ -122,15 +114,12 @@ class SignUpScreen extends StatelessWidget {
                               Center(
                                 child: CustomButton(
                                   text: 'Sign up',
-                                  // text: 'Register',
-                                  // backgroundColor: const Color.fromARGB(255, 27, 65, 146),
                                   backgroundColor: primaryClr,
                                   textColor: Colors.white,
                                   fontSize: 18,
                                   onPressed: () => context.read<SignBloc>().add(
                                         SignUpUserEvent(
                                           signUpUser: ModelUser(
-                                            // id: idCustomer,
                                             userName: input1.text,
                                             password: input2.text,
                                           ),

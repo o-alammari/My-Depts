@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testing_2/app/function/custom_snack_bar.dart';
-import 'package:testing_2/model/model_customer.dart';
-import 'package:testing_2/model/model_procedures.dart';
-import 'package:testing_2/presentation/customer/view-model/bloc/customer_bloc.dart';
-import 'package:testing_2/presentation/procedure/view-model/bloc_procedure/procedure_bloc.dart';
-import 'package:testing_2/services/customers_service.dart';
-import 'package:testing_2/services/procedures_service.dart';
-import 'package:testing_2/app/widgets/custom_button.dart';
-import 'package:testing_2/app/widgets/select_box.dart';
-import 'package:flutter_sms/flutter_sms.dart';
-import '../../../theme.dart';
-import '../../../app/widgets/custom_text_field.dart';
+import 'package:my_debts/app/function/custom_snack_bar.dart';
+import 'package:my_debts/app/utils/theme.dart';
+import 'package:my_debts/app/widgets/custom_button.dart';
+import 'package:my_debts/app/widgets/custom_text_field.dart';
+import 'package:my_debts/app/widgets/select_box.dart';
+import 'package:my_debts/model/model_procedures.dart';
+import 'package:my_debts/presentation/customer/view-model/bloc/customer_bloc.dart';
+import 'package:my_debts/presentation/procedure/view-model/bloc_procedure/procedure_bloc.dart';
 
 class AddProcedure extends StatefulWidget {
   const AddProcedure({super.key});
@@ -44,7 +40,6 @@ class _AddProcedureState extends State<AddProcedure> {
               .read<ProcedureBloc>()
               .add(AllProceduresEvent(customerId: idCustomer));
         } else if (state.status.isError) {
-          // customSnackBar(context, 'Type Error ${state.errorMessage}');
           customSnackBar(
               context, 'Type Error => on save Failure Please Enter Value');
         }
@@ -57,16 +52,12 @@ class _AddProcedureState extends State<AddProcedure> {
             icon: const Icon(
               Icons.arrow_back_ios,
               size: 24,
-              // color: primaryClr,
               color: Colors.white,
             ),
           ),
           title: Text('Add Procedure', style: titleAppBarStyle),
           elevation: 0.1,
-          // backgroundColor: const Color(0xFFEFEBEB).withOpacity(.2),
-          // backgroundColor: const Color.fromARGB(255, 233, 112, 13),
           backgroundColor: primaryClr,
-          // backgroundColor: primaryClr,
         ),
         body: Form(
           key: formKey,
@@ -114,58 +105,21 @@ class _AddProcedureState extends State<AddProcedure> {
                     textColor: Colors.white,
                     fontSize: 18,
                     onPressed: () async {
-                      String message = "This is a test message!";
-                      List<String> recipents = [
-                        "00967713713392",
-                        "+967713713392"
-                      ];
-
-                      String result = await sendSMS(
-                              message: message,   
-                              recipients: recipents,
-                              sendDirect: true)
-                          .catchError((onError) {
-                        print(onError);
-                      });
-                      print(result);
-
-
-  //  SmsSender sender = SmsSender();
-    String address = "1234567";
-
-    // SmsMessage message = SmsMessage(address, 'Hello flutter!');
-    // message.onStateChanged.listen((state) {
-    //   if (state == SmsMessageState.Sent) {
-    //     print("SMS is sent!");
-    //     setState(() {
-    //       _message = "SMS is sent";
-    //     });
-    //   } else if (state == SmsMessageState.Delivered) {
-    //     print("SMS is delivered!");
-    //     setState(() {
-    //       _message = "SMS is delivered!";
-    //     });
-    //   }
-    // });
-    // sender.sendSms(message);
-                      // var re = await ProceduresServices()
-                      //     .readAllProceduresCustomerSum(1);
-                      // print(re);
-                      // context.read<ProcedureBloc>().add(
-                      //       AddProcedureEvent(
-                      //         addProcedure: ModelProcedures(
-                      //           idCustomer: idCustomer,
-                      //           nameProcedures: input1.text,
-                      //           dateProcedures: DateTime.now().toString(),
-                      //           credit: type == 'Credit'
-                      //               ? int.parse(input2.text)
-                      //               : 0,
-                      //           debit: type == 'Debit'
-                      //               ? int.parse(input2.text)
-                      //               : 0,
-                      //         ),
-                      //       ),
-                      //     );
+                      context.read<ProcedureBloc>().add(
+                            AddProcedureEvent(
+                              addProcedure: ModelProcedures(
+                                idCustomer: idCustomer,
+                                nameProcedures: input1.text,
+                                dateProcedures: DateTime.now().toString(),
+                                credit: type == 'Credit'
+                                    ? int.parse(input2.text)
+                                    : 0,
+                                debit: type == 'Debit'
+                                    ? int.parse(input2.text)
+                                    : 0,
+                              ),
+                            ),
+                          );
                     },
                   ),
                 )

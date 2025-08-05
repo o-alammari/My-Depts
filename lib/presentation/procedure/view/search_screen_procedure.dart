@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testing_2/app/function/custom_snack_bar.dart';
-import 'package:testing_2/presentation/procedure/view-model/bloc_procedure/procedure_bloc.dart';
-import 'package:testing_2/theme.dart';
+import 'package:my_debts/app/function/custom_snack_bar.dart';
+import 'package:my_debts/app/utils/theme.dart';
+import 'package:my_debts/presentation/procedure/view-model/bloc_procedure/procedure_bloc.dart';
+
 import './widgets/all_procedures_items.dart';
 
 class SearchScreenProcedure extends StatelessWidget {
   const SearchScreenProcedure({super.key});
-  // final searchFieldKey = GlobalKey<FormFieldState>();
-  // WidgetsBinding.instance?.addPostFrameCallback((_) {
-  //   searchFieldKey.currentState?.requestFocus();
-  // });
+
   @override
   Widget build(BuildContext context) {
     final idCustomer = ModalRoute.of(context)!.settings.arguments as int;
@@ -30,9 +28,9 @@ class SearchScreenProcedure extends StatelessWidget {
               actions: [
                 Container(
                   margin: const EdgeInsets.only(
-                      top: 11, left: 0, right: 5, bottom: 6),
-                  // height: 30,
-                  width: 290,
+                      top: 11, left: 10, right: 0, bottom: 6),
+                  height: 40,
+                  width: 280,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     color: const Color.fromARGB(255, 215, 208, 208),
@@ -44,7 +42,6 @@ class SearchScreenProcedure extends StatelessWidget {
                       const SizedBox(width: 8),
                       Expanded(
                         child: TextField(
-                          // key: searchFieldKey,
                           decoration: const InputDecoration.collapsed(
                             hintText: 'Search',
                           ),
@@ -68,20 +65,16 @@ class SearchScreenProcedure extends StatelessWidget {
                   },
                   child: const Text(
                     'Cancel',
-                    style: TextStyle(fontSize: 18, color: primaryClr),
+                    style: TextStyle(fontSize: 12, color: primaryClr),
                   ),
                 ),
               ],
-              // leading: ,
-              backgroundColor:
-                  const Color.fromARGB(255, 234, 237, 234), // لون خلفية العنوان
-              expandedHeight: 60, // ارتفاع العنوان عندما يتم توسيعه
-              pinned:
-                  true, // يتم تثبيت العنوان في الجزء العلوي عند التمرير للأسفل
+              backgroundColor: const Color.fromARGB(255, 234, 237, 234),
+              expandedHeight: 60,
+              pinned: true,
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
-                // const SizedBox(height: 20),
                 (context, index) {
                   return AllProceduresItems(
                     modelProcedure: context

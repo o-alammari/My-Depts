@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testing_2/constant.dart';
-import 'package:testing_2/app/function/custom_snack_bar.dart';
-import 'package:testing_2/model/model_procedures.dart';
-import 'package:testing_2/presentation/procedure/view-model/bloc_procedure/procedure_bloc.dart';
-import 'package:testing_2/services/procedures_service.dart';
-import 'package:testing_2/app/widgets/custom_button.dart';
+import 'package:my_debts/app/utils/constant.dart';
+import 'package:my_debts/app/function/custom_snack_bar.dart';
+import 'package:my_debts/model/model_procedures.dart';
+import 'package:my_debts/presentation/procedure/view-model/bloc_procedure/procedure_bloc.dart';
+import 'package:my_debts/app/widgets/custom_button.dart';
 
-import '../../../theme.dart';
+import '../../../app/utils/theme.dart';
 import '../../../app/widgets/custom_text_field.dart';
 
 class EditProcedure extends StatelessWidget {
@@ -16,8 +15,7 @@ class EditProcedure extends StatelessWidget {
   late TextEditingController input1 = TextEditingController();
 
   late TextEditingController input2 = TextEditingController();
-  
-  // late ModelProcedures model;
+
   @override
   Widget build(BuildContext context) {
     ModelProcedures model =
@@ -29,8 +27,6 @@ class EditProcedure extends StatelessWidget {
             : model.debit == 0
                 ? model.credit.toString()
                 : model.debit.toString());
-    print(model.credit == '0' ? '0' : input2.text);
-    print(model.debit == '0' ? '0' : input2.text);
     return BlocListener<ProcedureBloc, ProcedureState>(
       listener: (context, state) {
         if (state.status.isSuccess) {

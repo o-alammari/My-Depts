@@ -1,4 +1,4 @@
-import 'package:testing_2/model/model_procedures.dart';
+import 'package:my_debts/model/model_procedures.dart';
 import '../db_helper/repository.dart';
 
 class ProceduresServices {
@@ -6,15 +6,12 @@ class ProceduresServices {
   ProceduresServices() {
     _repository = Repository();
   }
-  //Save User
+
   saveProcedures(ModelProcedures procedure) async {
     return await _repository.insertData('procedures', procedure.toJson());
   }
 
-  //Read All Users
-  // readAllProceduresCustomer(id, from, to) async {
   readAllProceduresCustomer() async {
-    // return await _repository.readAllProceduresCustomer(id,from,to );
     return await _repository.readAllProceduresCustomer(
         1, '2023-11-20', '2023-01-31');
   }
@@ -23,7 +20,6 @@ class ProceduresServices {
     return await _repository.readDataById('procedures', id);
   }
 
-  //Edit User
   updateProcedures(ModelProcedures procedure) async {
     return await _repository.updateData('procedures', procedure.toJson());
   }
