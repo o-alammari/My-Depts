@@ -1,4 +1,4 @@
-# 💸 My Debts - Flutter App
+# 💸 Debt App - Flutter App
 
 **My Debts** is a Flutter application designed to help you manage your personal debts effectively. Track what others owe you and what you owe to others — all in one organized, offline-capable app.
 
