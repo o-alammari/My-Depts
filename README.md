@@ -10,7 +10,7 @@
 |:---:|:---:|:---:|
 | ![Login Screen](assets/screenshots/login_screen.png) | ![Home Screen](assets/screenshots/4-home.png) | ![Customer Screen](assets/screenshots/customer.png) |
 
-| Procedure Screen | Report Screen | Actions Screen |
+| Procedure Screen | [Procedure Search Screen | Report Screen |
 |:---:|:---:|:---:|
 | ![Procedure Screen](assets/screenshots/procedure.png) | ![Procedure Search Screen](assets/screenshots/6-1-procedure-serach.png) | ![Report Screen](assets/screenshots/7-0-report.png) |
 
