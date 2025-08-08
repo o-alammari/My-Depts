@@ -6,11 +6,14 @@
 
 ## 📱 Screenshots
 
-| Login Screen | Clients Screen | Actions Screen |
+| Login Screen | Home Screen | Customer Screen |
 |:---:|:---:|:---:|
-| ![Login Screen](assets/screenshots/login_screen.png) | ![Clients Screen](assets/screenshots/clients_screen.png) | ![Actions Screen](assets/screenshots/actions_screen.png) |
+| ![Login Screen](assets/screenshots/login_screen.png) | ![Home Screen](assets/screenshots/4-home.png) | ![Customer Screen](assets/screenshots/customer.png) |
 
-_(You can add more screenshots or a demo GIF to better showcase the app)_
+| Procedure Screen | Report Screen | Actions Screen |
+|:---:|:---:|:---:|
+| ![Procedure Screen](assets/screenshots/procedure.png) | ![Procedure Search Screen](assets/screenshots/6-1-procedure-serach.png) | ![Report Screen](assets/screenshots/7-0-report.png) |
+
 
 ---
 
